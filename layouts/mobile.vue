@@ -3,6 +3,28 @@
     const items = computed(()=>{
 
       return  [
+      [{
+          label: 'Офисная',
+          to: '/ofisnaya-nedvizhimost',
+          icon: 'i-heroicons-cog-8-tooth',
+          click: () => {
+            useRouter().push('/ofisnaya-nedvizhimost')
+          }
+        }],        [{
+          label: 'Торговая',
+          to: '/torgovaya-nedvizhimost',
+          icon: 'i-heroicons-cog-8-tooth',
+          click: () => {
+            useRouter().push('/torgovaya-nedvizhimost')
+          }
+        }],        [{
+          label: 'Складская',
+          to: '/skladskaya-nedvizhimost',
+          icon: 'i-heroicons-cog-8-tooth',
+          click: () => {
+            useRouter().push('/skladskaya-nedvizhimost')
+          }
+        }],        
         [{
           label: 'Поиск',
           to: '/find',

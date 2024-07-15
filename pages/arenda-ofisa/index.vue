@@ -2,7 +2,7 @@
 import findLinc from '/components/contents/find/linc/tip'
 import callPromo from '/components/contents/callPromo'
 import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
-
+import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
 useHead({
     title: 'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
     meta: [
@@ -64,6 +64,13 @@ useHead({
             <largeItem :item="row"  />
         </div>
         <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
+
+    </div>
+
+    <div class="mobileOnly" >
+        <div v-for="row in rows" :key="row.ID"  >
+          <mobileItem :row="row" />
+        </div>
 
     </div>
 </template>
