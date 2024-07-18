@@ -23,7 +23,7 @@
         </UCard>
     </div>
 </template>
-<style>
+<style scoped>
 html, body {
                 height: 100vh;
              

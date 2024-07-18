@@ -112,6 +112,7 @@ export default defineNuxtConfig({
   ],
   modules: [
     '@nuxt/ui',
+    'nuxt-viewport'
     //'@sidebase/nuxt-auth',
   ],
   build: {

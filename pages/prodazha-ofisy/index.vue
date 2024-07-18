@@ -2,19 +2,18 @@
 import findLinc from '/components/contents/find/linc/tip'
 import callPromo from '/components/contents/callPromo'
 import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
+import { useNuxtApp } from '#app'
+const { $viewport } = useNuxtApp()
+    useHead({
+        title: 'Продажа офисов в Москве, купить офисное помещение в Москве .',
+        meta: [
+            { name: 'keywords', content: 'Продажа офисов в Москве, купить офисное помещение в Москве.' },
+            { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
+        ]
+    })
 
-useHead({
-    title: 'Продажа офисов в Москве, купить офисное помещение в Москве .',
-    meta: [
-        { name: 'keywords', content: 'Продажа офисов в Москве, купить офисное помещение в Москве.' },
-        { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
-    ]
-})
 
 
-    definePageMeta({
-        layout: 'onecol',
-    });
     const page = ref(1)
     const rowsGet = ref({})
     const nextUrl = '/prodazha-ofisy'
@@ -45,9 +44,19 @@ useHead({
         })
     })
 
+    definePageMeta({
+        layout: 'universal',
+        pageType: 1,
+        type:'Офис',
+        opp:'Продажа',
+        title: 'Продажа офисов в Москве, купить офисное помещение в Москве .',
+        keywords: 'Продажа офисов в Москве, купить офисное помещение в Москве.' ,
+        description: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.`,
+    });
+
 </script>
 <template>
-    <div style="display: flex;">
+    <div style="display: flex;"  v-if="!$viewport.isLessThan('tablet')">
         <div style="flex: 1 auto;padding-right: 8px;min-width: 700px;">
             <findLinc tip="Офис" />
         </div>
@@ -57,7 +66,7 @@ useHead({
     </div>
     <UPagination  v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="justify-content: center;margin-top: 12px;" />
     <div v-for="row in rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" style="margin-top: 12px;" >
-        <largeItem :item="row" />
+        <largeItem v-if="!$viewport.isLessThan('tablet')" :item="row" />
     </div>
     <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
 </template>
