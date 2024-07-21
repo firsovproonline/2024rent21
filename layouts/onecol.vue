@@ -24,33 +24,5 @@
     </div>
 </template>
 <style scoped>
-html, body {
-                height: 100vh;
-             
-}
-html {
-    display: table;
-    margin: auto;
-}
-body {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0 auto;
-    
-} 
-#__nuxt{
-    min-width: 960px;
-    max-width: 960px;
-
-    overflow: auto;
-    min-height: 100vh;    
-}
-
-* {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    font-size: 14px;
-    font-family: 'Times New Roman', Times, serif;
-}
 
 </style>

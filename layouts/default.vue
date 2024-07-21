@@ -31,35 +31,3 @@
         </UCard>
     </div>
 </template>
-<style scoped>
-html, body {
-                height: 100vh;
-             
-}
-html {
-    display: table;
-    margin: auto;
-    background-color: #ffffff;
-}
-body {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0 auto;
-    background-color: #ffffff;
-    
-} 
-#__nuxt{
-    max-width: 1000px;
-    width: 100vw;
-    padding: 2px;
-    overflow: auto;
-    min-height: 100vh;    
-}
-
-* {
-
-    font-size: 14px;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-</style>
