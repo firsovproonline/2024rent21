@@ -64,10 +64,10 @@ const { $viewport } = useNuxtApp()
                     <a href="/">
                     <img src='/assets/img/21logo.png' />
                 </a>
-                <div class="logo nomobile">Объявления по аренде и продаже коммерческой недвижимости<br>в Москве и Московской области</div>    
+                   
                 </div>            
             </div>
-            <div><h1>{{ route.matched[0].meta.title }}</h1></div>
+            <div><h1 style="text-align:center">{{ route.matched[0].meta.titleMobile }}</h1></div>
             <div>
                 <UDropdown  :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
                     <UIcon name="i-heroicons-bars-3" style="width: 28px;height: 28px;" />
@@ -90,6 +90,44 @@ const { $viewport } = useNuxtApp()
             </div>        
         </div>        
     </div>
+    <div v-else>
+        <div style="display: flex;margin-top: 5px;">
+        <div>
+            <div>
+                <a href="/">
+                <img src='/assets/img/21logo.png' />
+            </a>
+            <div class="logo">Объявления по аренде и продаже коммерческой недвижимости<br>в Москве и Московской области</div>    
+            </div>            
+        </div>
+        <div style="width: 18px;"></div>
+        <div>
+            <div>
+                <h1>{{ route.matched[0].meta.title }}</h1>							
+                <div class="module" ><p>{{ route.matched[0].meta.description }}</p></div>
+            </div>
+
+            <div>
+                <div style="display: flex;justify-content: flex-start;margin-top: 8px;" class="menurentH">
+                <div class="item item3">
+                    <a href="/ofisnaya-nedvizhimost">Офисная недвижимость</a>
+                </div>
+                <div class="item item3">
+                    <a href="/torgovaya-nedvizhimost">Торговая недвижимость</a>
+                </div>
+                <div class="item item3">
+                    <a href="/skladskaya-nedvizhimost">Складская недвижимость</a>
+                </div>
+                <div class="item item3">
+                    <a class="alert" href="/sobstvennikam">Собственникам</a>
+                </div>
+            </div>            
+
+            </div>
+        </div>
+    </div>          
+    </div>
+    <div style="height: 8px;"></div>
     <slot />
     <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="padding: 0px !important;margin-top: 12px; background-color: #a9a9a921;"  >
             <sfooter />
