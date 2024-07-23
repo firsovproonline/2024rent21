@@ -30,7 +30,7 @@
         <UCarousel style="min-width: 50%;max-width: 390px;" ref="carouselRef" v-slot="{ item, index }" :items="items" :ui="{ item: 'basis-full',  
         arrows: {wrapper: 'flex items-center justify-between'  } }" class="rounded-lg overflow-hidden" arrows>
           <div class="text-center mx-auto" style="flex: auto;">
-          <div :src="item" draggable="false" :style="'background-image: url('+item+');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
+          <div :src="item" draggable="false" :style="'background-image: url(\''+item+'\');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
           <div style="padding-left: 12px;padding-right: 12px;margin-top: 8px;">
             <div v-if="index==0" clas="infoPIm">
               <div style="display: flex;justify-content: space-between;align-items: flex-end;">
