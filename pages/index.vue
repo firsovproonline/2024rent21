@@ -71,12 +71,12 @@
 <template>
   <div style="display: flex;">
     <div>
-      <div class="nomobile">
+      <div  v-if="!$viewport.isLessThan('tablet')">
         <findLinc tip="ALL"  />
       </div>
       <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin-bottom: 12px; padding: 0px !important;"  >
       <div class="findmap">
-                      <div class="header nomobile" >
+                      <div v-if="!$viewport.isLessThan('tablet')" class="header" >
     <p><strong><span style="font-family: 'times new roman', times; font-size: small;">БОЛЬШОЙ ВЫБОР АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ПО АРЕНДЕ ОФИСОВ И ОСОБНЯКОВ, СКЛАДОВ И ОБЪЕКТОВ ТОРГОВОЙ НЕДВИЖИМОСТИ В МОСКВЕ.</span></strong></p>
     <p><span style="font-family: 'times new roman', times; font-size: small;">Также представлены в большом колличестве предложения: Аренда офиса без комиссии от собственника</span></p>
     <p><strong><span style="font-family: 'times new roman', times; font-size: small;">СРОЧНЫЙ ПОИСК И ПОДБОР ОФИСНЫХ, СКЛАДСКИХ И ТОРГОВЫХ ПОМЕЩЕНИЙ В МОСКВЕ!</span></strong></p>
@@ -97,7 +97,7 @@
       </div>
       </UCard>
       <div class="head">Последние предложения по аренде и продаже помещений</div>
-      <div class="nomobile">
+      <div v-if="!$viewport.isLessThan('tablet')">
         <div v-for="row in LastRows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
           <bigItem :item="row"/>
         </div>
@@ -106,7 +106,7 @@
 
       </div>
 
-      <div class="mobileOnly" >
+      <div v-if="$viewport.isLessThan('tablet')" >
         <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
           <mobileItem :row="row" />
         </div>
@@ -115,7 +115,7 @@
 
     </div>
 
-    <div style="min-width: 265px;margin-left: 12px;max-width: 265px;" class="nomobile">
+    <div v-if="!$viewport.isLessThan('tablet')" style="min-width: 265px;margin-left: 12px;max-width: 265px;" >
       <callPromo />
       <rformSmall />
       <div class="head">Популярные</div>
@@ -124,7 +124,7 @@
       </div>
     </div>    
   </div>
-  <div class="nomobile">
+  <div v-if="!$viewport.isLessThan('tablet')">
     <div class="head">Специальные предложения</div>
         <div v-for="row1 in rows.rows" :key="row1.ID" :class=" row1.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
           <largeItem :item="row1" />
