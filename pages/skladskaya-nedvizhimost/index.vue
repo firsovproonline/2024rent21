@@ -1,72 +1,114 @@
 <script setup>
+    definePageMeta({
+        layout: 'universal',
+        pageType: 1,
+        type:'Офис',
+        opp:'Продажа',
+        titleMobile:'Складская недвижимость, Аренда и Продажа.',
+        title: 'Складская недвижимость, Аренда и Продажа.',
+        keywords: 'аренда офиса, аренда офиса от собственника в москве, аренда офисов от собственника в москве,  снять офис, снять офис в москве, аренда офисов, аренда офисов в москве, аренда офиса в москве, аренда офиса без комиссии, аренда офисов без комиссии,  аренда офиса от собственника, аренда офисов от собственника, доска объявлений, аренда офисов без посредников, аренда особняка, аренда особняков, аренда офиса в бизнес центре, аренда офисов в бизнес центрах, аренда офиса без комиссии в москве, аренда офиса в москве собственник.' ,
+        description: `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
+    });
+    import smallItem from '/components/contents/dbItem/im_object/small/index.vue'
     import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
+    import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
+    import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
     import lincMetro from '/components/contents/lincMetro/index.vue'
     import findLinc from '/components/contents/find/linc/tip'
-    import logo from '/components/contents/logo'
-    import headerMenu from '/components/contents/headerMenu'
+
     import callPromo from '/components/contents/callPromo'
-    import sfooter from '/components/contents/footer'
-    definePageMeta({
-        layout: 'empty',
-    });
+    import rformSmall from '/components/contents/requestForm/small'
 
+    const { $viewport } = useNuxtApp()
+    let rows =null
+    let PopularRows = null
+    let LastRows = null
+    LastRows = await $fetch( `/api/im_object`, {
+      method: 'GET',
+      params: {
+        page: 1,
+        perPage: 7,
+        TIP:'Склад'
+        //orderBy:'ID ASC'
+      }
+    })
 
-    const rows = await $fetch( `/api/im_object`, {
+    rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: {
         page: 1,
         perPage: 5,
+        TIP:'Склад',
+
+        orderBy:'ID DESC'
+      }
+    })
+    PopularRows = await $fetch( `/api/im_object`, {
+      method: 'GET',
+      params: {
+        page: 1,
+        perPage: 4,
+        TIP:'Склад',
+        orderBy:'ROUND(UID)'
       }
     })
     useHead({
       title: 'Складская недвижимость, Аренда и Продажа .',
       meta: [
-        { name: 'keywords', content: 'Складская недвижимость, Аренда и Продажа.' },
-        { name: 'description', content: `Складская недвижимость, Аренда и Продажа.` }
+        { name: 'keywords', content: 'Складская недвижимость  Аренда и Продажа.' },
+        { name: 'description', content: `Складская недвижимость  Аренда и Продажа.` }
       ],
       bodyAttrs: {
         class: 'test'
       },
-
+      script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
     })
 </script>
 <template>
+  <div style="display: flex;">
+    <div>
+      <div  v-if="!$viewport.isLessThan('tablet')">
+        <findLinc tip="Склад"  />
+      </div>
 
-<div style="padding-left: 1px;padding-right: 1px;">
-        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="padding: 3px !important;margin-top: 6px;"  >
-        <div style="display: flex;">
-            <logo style="margin-top: 6px;" />
-            <div style="width: 18px;"></div>
-            <div>
-                <h1>Складская недвижимость, Аренда и Продажа.</h1>							
-                <div class="module" style="max-width: 690px;"><p>Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы</p></div>
-                <headerMenu style="flex: 1 auto;"/>
-            </div>
+      <div class="head">Последние предложения по аренде и продаже складов</div>
+      <div v-if="!$viewport.isLessThan('tablet')">
+        <div v-for="row in LastRows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+          <bigItem infoUrl="/skladskaya-nedvizhimost/" :item="row"/>
         </div>
-        </UCard>
-        <div style="display: flex;">
-            <div style="flex: 1 auto;padding-right: 8px;min-width: 700px;">
-                <findLinc tip="Склад" />
-                <div class="head">Специальные предложения</div>
 
-    <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
-        <bigItem :item="row" />
-    </div>
-    <UCard :ui="{ body: { base: 'grid grid-cols-3' } }" style="max-width: 790px;padding-left: 6px; padding-right: 6px;">
-      <lincMetro url="arenda-magazina" tip="Торговая площадь" opp="Аренда" style="margin-top: 8px;" />
-    </UCard>
 
-            </div>
-            <div style="width: 300px;text-align: -webkit-right;">
-                <callPromo />
-            </div>
+
+      </div>
+
+      <div v-if="$viewport.isLessThan('tablet')" >
+        <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+          <mobileItem :row="row" />
         </div>
-        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="padding: 0px !important;margin-top: 12px;"  >
-            <sfooter />
-        </UCard>
+
+      </div>
+
     </div>
 
+    <div v-if="!$viewport.isLessThan('tablet')" style="min-width: 265px;margin-left: 12px;max-width: 265px;" >
+      <callPromo />
+      <rformSmall />
+      <div class="head">Популярные</div>
+      <div v-for="row in PopularRows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+        <smallItem infoUrl="/skladskaya-nedvizhimost/" :row="row"/>
+      </div>
+    </div>    
+  </div>
+  <div v-if="!$viewport.isLessThan('tablet')">
+    <div class="head">Специальные предложения</div>
+        <div v-for="row1 in rows.rows" :key="row1.ID" :class=" row1.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+          <largeItem infoUrl="/skladskaya-nedvizhimost/" :item="row1" />
+        </div>
+        <UCard :ui="{ body: { base: 'grid grid-cols-1' } }" style="padding-left: 6px; padding-right: 6px;" class="nomobile">
+        <lincMetro url="arenda-sklada" style="margin-top: 8px;width: 100%;" />
+      </UCard>
 
+  </div>
 
 </template>
 <style scoped>

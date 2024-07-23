@@ -4,6 +4,10 @@
             type: Object,
             required: true,
         },
+        infoUrl:{
+            type: String,
+            default:'/ofisnaya-nedvizhimost/'
+        }
     });
 </script>
 <template>
@@ -30,7 +34,7 @@
                 <div>{{ item.RAJON }}</div>
                 <div>{{ item.ULITCA }}</div>
                 <div style="text-align: end;margin-top: 12px;">
-                    <UButton square label="Подробнее" color="gray" variant="solid" :to="'/ofisnaya-nedvizhimost/'+item.ID"  />
+                    <UButton square label="Подробнее" color="gray" variant="solid" :to="infoUrl+item.ID"  />
                 </div>
             </div>            
         </div>

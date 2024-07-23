@@ -46,7 +46,7 @@
             `
             markerElement.className = 'marker-class';
             mapY.addChild(new YMapMarker({type: 'buildings',coordinates: [props.row.LAT, props.row.LNG]}, markerElement));    
-        },50)
+        },100)
     })        
 </script>
 <template>

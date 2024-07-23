@@ -4,6 +4,10 @@
             type: Object,
             required: true,
         },
+        infoUrl:{
+            type: String,
+            default:'/ofisnaya-nedvizhimost/'
+        }         
     });
 </script>
 <template>

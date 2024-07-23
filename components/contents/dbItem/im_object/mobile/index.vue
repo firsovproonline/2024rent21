@@ -5,6 +5,10 @@
             required: true,
             default:{PHOTO:JSON.stringify([])}
         },
+        infoUrl:{
+            type: String,
+            default:'/ofisnaya-nedvizhimost/'
+        }         
     });
     //https://static-maps.yandex.ru/v1?ll=37.620070,55.753630&lang=ru_RU&size=450,450&z=13&pt=37.620070,55.753630,pmwtm1~37.64,55.76363,pmwtm99&apikey=YOUR_API_KEY
 //  "https://static-maps.yandex.ru/1.x/?ll=" + row.LAT + "," + row.LNG + "&z=16&l=map&size=360,200&pt=" + row.LAT + "," + row.LNG
@@ -49,7 +53,7 @@
                   </div>
                 </div>
                 <div>
-                  <UButton block :to="'/ofisnaya-nedvizhimost/'+row.ID">Подробнее</UButton>
+                  <UButton block :to="infoUrl+row.ID">Подробнее</UButton>
                 </div>
               </div>
 
