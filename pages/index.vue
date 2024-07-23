@@ -11,6 +11,7 @@
     });
     import smallItem from '/components/contents/dbItem/im_object/small/index.vue'
     import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
+    import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
     import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
     import lincMetro from '/components/contents/lincMetro/index.vue'
     import findLinc from '/components/contents/find/linc/tip'
@@ -21,6 +22,16 @@
     const { $viewport } = useNuxtApp()
     let rows =null
     let PopularRows = null
+    let LastRows = null
+    LastRows = await $fetch( `/api/im_object`, {
+      method: 'GET',
+      params: {
+        page: 1,
+        perPage: 7,
+        //orderBy:'ID ASC'
+      }
+    })
+
     rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: {
@@ -33,7 +44,7 @@
       method: 'GET',
       params: {
         page: 1,
-        perPage: 5,
+        perPage: 4,
         orderBy:'ROUND(UID)'
       }
     })
@@ -87,9 +98,12 @@
       </UCard>
       <div class="head">Последние предложения по аренде и продаже помещений</div>
       <div class="nomobile">
-        <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
-          <bigItem :item="row" />
+        <div v-for="row in LastRows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+          <bigItem :item="row"/>
         </div>
+
+
+
       </div>
 
       <div class="mobileOnly" >
@@ -98,12 +112,10 @@
         </div>
 
       </div>
-      <UCard :ui="{ body: { base: 'grid grid-cols-1' } }" style="padding-left: 6px; padding-right: 6px;" class="nomobile">
-        <lincMetro url="arenda-ofisa" style="margin-top: 8px;width: 100%;" />
-      </UCard>
+
     </div>
 
-    <div style="min-width: 265px;margin-left: 12px;" class="nomobile">
+    <div style="min-width: 265px;margin-left: 12px;max-width: 265px;" class="nomobile">
       <callPromo />
       <rformSmall />
       <div class="head">Популярные</div>
@@ -112,7 +124,16 @@
       </div>
     </div>    
   </div>
+  <div class="nomobile">
+    <div class="head">Специальные предложения</div>
+        <div v-for="row1 in rows.rows" :key="row1.ID" :class=" row1.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+          <largeItem :item="row1" />
+        </div>
+        <UCard :ui="{ body: { base: 'grid grid-cols-1' } }" style="padding-left: 6px; padding-right: 6px;" class="nomobile">
+        <lincMetro url="arenda-ofisa" style="margin-top: 8px;width: 100%;" />
+      </UCard>
 
+  </div>
 
 </template>
 <style scoped>

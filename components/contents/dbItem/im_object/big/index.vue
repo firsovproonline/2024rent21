@@ -10,7 +10,8 @@
     <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1'}  }" style="margin-bottom: 12px; padding: 0px !important;"  >
         <h1>{{ item.TITLE }}</h1>
         <div style="display: flex;">
-            <img :src="'/api/photo?puid='+Object.values(JSON.parse(item.PHOTO)).find(item => item.STEP == 0).PUID+'&title='+Object.values(JSON.parse(item.PHOTO)).find(item => item.STEP == 0).NAME+'&size=small'" style="height: 110px;width: 160px;min-width: 160px;">
+            <img v-if="Object.values(JSON.parse(item.PHOTO)).find(item => item.STEP == 0)" :src="'/api/photo?puid='+Object.values(JSON.parse(item.PHOTO)).find(item => item.STEP == 0).PUID+'&title='+Object.values(JSON.parse(item.PHOTO)).find(item => item.STEP == 0).NAME+'&size=small'" style="height: 110px;width: 160px;min-width: 160px;">
+            <img v-else :src="'/api/photo?puid='+Object.values(JSON.parse(item.PHOTO))[0].PUID+'&title='+Object.values(JSON.parse(item.PHOTO))[0].NAME+'&size=small'" style="height: 110px;width: 160px;min-width: 160px;">
             <div style="border-right:1px solid #bfbfbf;padding-right: 16px;margin-left: 6px;width: 140px;min-width: 140px;">
                 <div>{{ item.OPP }} {{ item.TIP }}</div>
                 <div v-if="item.PL1">Площадь {{ item.PL1.split('-')[0] }} м<sup>2</sup></div>
