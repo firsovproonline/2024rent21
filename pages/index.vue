@@ -9,6 +9,7 @@
         keywords: 'аренда офиса, аренда офиса от собственника в москве, аренда офисов от собственника в москве,  снять офис, снять офис в москве, аренда офисов, аренда офисов в москве, аренда офиса в москве, аренда офиса без комиссии, аренда офисов без комиссии,  аренда офиса от собственника, аренда офисов от собственника, доска объявлений, аренда офисов без посредников, аренда особняка, аренда особняков, аренда офиса в бизнес центре, аренда офисов в бизнес центрах, аренда офиса без комиссии в москве, аренда офиса в москве собственник.' ,
         description: `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
     });
+    import smallItem from '/components/contents/dbItem/im_object/small/index.vue'
     import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
     import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
     import lincMetro from '/components/contents/lincMetro/index.vue'
@@ -16,14 +17,24 @@
 
     import callPromo from '/components/contents/callPromo'
     import rformSmall from '/components/contents/requestForm/small'
-    import popular from '/components/contents/popular'
 
-
-    const rows = await $fetch( `/api/im_object`, {
+    const { $viewport } = useNuxtApp()
+    let rows =null
+    let PopularRows = null
+    rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: {
         page: 1,
         perPage: 5,
+        orderBy:'ID DESC'
+      }
+    })
+    PopularRows = await $fetch( `/api/im_object`, {
+      method: 'GET',
+      params: {
+        page: 1,
+        perPage: 5,
+        orderBy:'ROUND(UID)'
       }
     })
     useHead({
@@ -94,9 +105,11 @@
 
     <div style="min-width: 265px;margin-left: 12px;" class="nomobile">
       <callPromo />
-                    <rformSmall />
-                    <popular />    
-    
+      <rformSmall />
+      <div class="head">Популярные</div>
+      <div v-for="row in PopularRows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+        <smallItem :row="row"/>
+      </div>
     </div>    
   </div>
 

@@ -2,7 +2,13 @@ import connectionMysql from '../config/mysql';
 import IFace from "../interfaces/im_object.interface";
 export default {
     async findAllItem(q: any) {
+        let orderBy = ``
         let WHERE = ``
+        if(q.orderBy && q.orderBy !== '' && q.orderBy !== 'undefined'){
+            orderBy =' ORDER BY '+q.orderBy+' '
+        }
+
+
         if(q.OPP && q.OPP !== '' && q.OPP !== 'undefined'){
             if (WHERE !== ''){
                 WHERE += ' AND '
@@ -98,7 +104,7 @@ export default {
         const queryTotal = 'SELECT count(id) as total FROM im_objectКtRent21 '+WHERE;
         //console.log(queryTotal)
         const [total] = await connectionMysql.execute(queryTotal);
-        const query = 'SELECT * FROM im_objectКtRent21 '+WHERE+` order by ID desc limit `+page+','+q.perPage;
+        const query = 'SELECT * FROM im_objectКtRent21 '+WHERE+orderBy+` limit `+page+','+q.perPage;
         //console.log(query)
         const [rows] = await connectionMysql.execute(query);
         //console.log(q.perPage,total)
