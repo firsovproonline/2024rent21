@@ -145,3 +145,35 @@ padding-top: 4px;
 padding-bottom: 4px;
 /* background: url(/templates/rent21/images/tab_bgall.png); */
 }
+.fotoInd{
+    position: absolute;
+    flex-flow: wrap;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-bottom: 30px;
+      display: flow;
+  }
+  .adrInfo{
+    position: absolute;
+    z-index: 444;
+    background-color: #1c1d1e3b;
+    color: beige;
+
+    margin-right: 10px;
+    text-align: left;
+    padding: 8px;
+    width: 90vw;
+    margin-top: 1px;
+}
+
+.inputFind{
+    display: flex;
+    border: none;
+    padding-top: 8px;
+    background-color: #ffffff;
+}
+
+.padding0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

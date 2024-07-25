@@ -1,17 +1,25 @@
 <script setup>
 import rformBig from '/components/contents/requestForm/big'
 import infomap from '/components/contents/info/map/yandex'
-    definePageMeta({
-        layout: 'mobile',
+definePageMeta({
+        layout: 'universal',
+        pageType: 1,
+        type:'Офис',
+        opp:'Продажа',
+        titleMobile:'Складская недвижимость, Аренда и Продажа.',
+        title: 'Складская недвижимость, Аренда и Продажа.',
+        keywords: 'аренда офиса, аренда офиса от собственника в москве, аренда офисов от собственника в москве,  снять офис, снять офис в москве, аренда офисов, аренда офисов в москве, аренда офиса в москве, аренда офиса без комиссии, аренда офисов без комиссии,  аренда офиса от собственника, аренда офисов от собственника, доска объявлений, аренда офисов без посредников, аренда особняка, аренда особняков, аренда офиса в бизнес центре, аренда офисов в бизнес центрах, аренда офиса без комиссии в москве, аренда офиса в москве собственник.' ,
+        description: `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
     });
     const route = useRoute()
     const item = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: {
         page: 1,
-        perPage: 5,
+        perPage: 15,
         id:route.params.id,
-        dopinfo:1
+        dopinfo:1,
+        TIP:'Офис'
       }
     })
     const row = item.rows[0]
@@ -22,7 +30,7 @@ import infomap from '/components/contents/info/map/yandex'
     const items = []
     let c = 0
     JSON.parse(row.PHOTO).forEach(item=>{
-      if(c<78){
+      if(c<117){
         items.push('/api/photo?puid='+item.PUID+'&title='+item.NAME)
         c++
       }
@@ -56,8 +64,34 @@ import infomap from '/components/contents/info/map/yandex'
       <div class="row">
         <div class="col" style="text-align: -webkit-center;">
           <UCard :ui="{ body: { base: 'grid grid-cols-1 ffSr' } }" style="width: 100%;">
-            <UCarousel style="min-width: 50%;max-width: 100%;" ref="carouselRef" v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" arrows>
-              <img :src="item" draggable="false">
+<!--
+<UCarousel style="min-width: 50%;max-width: 100%;" ref="carouselRef"  :items="items" :ui="{ item: 'basis-full', indicators: {
+        wrapper: 'relative bottom-0 mt-4'} }" class="rounded-lg overflow-hidden" arrows >
+        </UCarousel>
+
+-->
+        <UCarousel style="min-width: 100%;max-width: 100%;" ref="carouselRef"
+    :items="items"
+    :ui="{
+      item: 'basis-full',
+      container: 'rounded-lg',
+      indicators: {
+        wrapper: 'relative bottom-0 mt-4 fotoInd'
+      }
+    }"
+    indicators
+    class="w-64 mx-auto"
+  >
+                  <template #default="{ item }">
+                    <div :src="item" draggable="false" :style="'background-image: url(\''+item+'\');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
+<!--
+                    <img :src="item" class="w-full" draggable="false">
+-->
+</template>
+
+    <template #indicator="{ onClick, page, active }">
+      <UButton color="gray" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" style="margin-right: 4px;" @click="onClick(page)" />
+    </template>
             </UCarousel>
           </UCard>
         </div>
@@ -141,5 +175,13 @@ import infomap from '/components/contents/info/map/yandex'
 }
 h1{
   font-weight: bold;
+}
+.fotoInd{
+  position: absolute;
+  flex-flow: wrap;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 30px;
+    display: flow;
 }
 </style>

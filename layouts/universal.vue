@@ -58,7 +58,8 @@ const { $viewport } = useNuxtApp()
 </script>
 <template>
     <div v-if="$viewport.isLessThan('tablet')" >
-        <div style="display: flex;align-items: center;">
+        <UCard :ui="{ body: { base: 'grid grid-cols-1' } }" style="padding-left: 6px; padding-right: 6px;" >
+            <div style="display: flex;align-items: center;">
             <div>
                 <div>
                     <a href="/">
@@ -89,6 +90,8 @@ const { $viewport } = useNuxtApp()
                 </UDropdown>
             </div>        
         </div>        
+        
+        </UCard>
     </div>
     <div v-else>
         <div style="display: flex;margin-top: 5px;">

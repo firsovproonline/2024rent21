@@ -20,13 +20,63 @@
         }
         items.push('/api/photo?puid='+item.PUID+'&title='+item.NAME)
     })
+    const route = useRoute()
 
- 
 </script>
 <template>
-  <div :class=" row.ID % 2 === 0 ? 'ring-gray-200 shadow  row rborderN':'ring-gray-200 shadow  row rborderN'" style="padding-top: 4px;">
-    <div class="col" style="text-align: -webkit-center;">
+  <div :class=" row.ID % 2 === 0 ? 'ring-gray-200 shadow  row rborderN':'ring-gray-200 shadow  row rborderN'" style="padding-top: 4px;margin-top: 7px;margin-right: 8px;margin-left: 8px;" >
+    <div class="col" style="text-align: -webkit-center;" >
       <div :ui="{ body: { base: 'grid grid-cols-1 ffSr' } }" style="width: 100%;">
+        <div class="adrInfo" v-on:dblclick="consoleHitOn">
+              <div>Город {{ row.GOROD }} </div>
+              <div>{{ row.ULITCA }} {{ row.DOM }} </div>
+              <div>{{ row.NALOGNAME }}</div>
+              <div>{{ row.TIPZD }}</div>
+              <div>Класс {{ row.KLASS }}</div>
+        </div>
+
+        <UCarousel style="min-width: 100%;max-width: 100%;" ref="carouselRef"
+          :items="items"
+          :ui="{
+            item: 'basis-full',
+            container: 'rounded-lg',
+            indicators: {
+              wrapper: 'relative bottom-0 mt-4 fotoInd'
+            }
+          }"
+          indicators
+          class="w-64 mx-auto"
+        >
+          <template #default="{ item }">
+            <div :src="item" draggable="false" :style="'background-color:#8080804a;background-image: url(\''+item+'\');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
+          </template>
+
+          <template #indicator="{ onClick, page, active }">
+            <UButton color="gray" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" style="margin-right: 4px;" @click="onClick(page)" />
+          </template>
+        </UCarousel>
+
+      <div>
+  <div style="display: flex;justify-content: space-between;align-items: flex-end;margin-top: 6px;">
+                <div>
+                  <div style="display: flex;align-items: center;">
+                    <div class="value">{{ row.OPP }} {{ row.TIP }} площадь {{ row.PL1 }} м<sup>2</sup></div>
+                  </div>
+                  <div style="display: flex;align-items: center;">
+                    <div class="value">Цена аренды в месяц {{ row.CENA_AR_MES_ALL }} руб.</div>
+                  </div>
+
+                  <div style="display: flex;align-items: center;">
+                    <div class="value">Этаж {{ row.ETAG }}</div>
+                  </div>
+                </div>
+                <div>
+                  <UButton color="white" block :to="infoUrl+row.ID">Подробнее</UButton>
+                </div>
+              </div>
+</div>
+
+<!--
         <UCarousel style="min-width: 50%;max-width: 390px;" ref="carouselRef" v-slot="{ item, index }" :items="items" :ui="{ item: 'basis-full',  
         arrows: {wrapper: 'flex items-center justify-between'  } }" class="rounded-lg overflow-hidden" arrows>
           <div class="text-center mx-auto" style="flex: auto;">
@@ -96,6 +146,8 @@
 
         </div>
         </UCarousel>
+
+-->
       </div>
     </div>
   </div>

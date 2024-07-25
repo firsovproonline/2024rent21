@@ -13,7 +13,8 @@
       method: 'GET',
       params: {
         page: 1,
-        perPage: 5,
+        perPage: 15,
+        TIP:'Офис'
       }
     })
     useHead({

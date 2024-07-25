@@ -15,12 +15,14 @@
     import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
     import lincMetro from '/components/contents/lincMetro/index.vue'
     import findLinc from '/components/contents/find/linc/tip'
+    import findMobile from '/components/contents/find/mobile'
 
     import callPromo from '/components/contents/callPromo'
     import rformSmall from '/components/contents/requestForm/small'
 
     const { $viewport } = useNuxtApp()
     let rows =null
+    const page = ref(1)
     let PopularRows = null
     let LastRows = null
     LastRows = await $fetch( `/api/im_object`, {
@@ -36,9 +38,15 @@
       method: 'GET',
       params: {
         page: 1,
-        perPage: 5,
-        orderBy:'ID DESC'
+        perPage: 15,
+        orderBy:'ID DESC',
+        TIP:'Офис',
+        OPP:'Аренда'
       }
+    })
+
+    const total = computed(()=>{
+        return rows.total
     })
     PopularRows = await $fetch( `/api/im_object`, {
       method: 'GET',
@@ -107,10 +115,13 @@
       </div>
 
       <div v-if="$viewport.isLessThan('tablet')" >
+       
+          <findMobile />
+
         <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
           <mobileItem :row="row" />
         </div>
-
+        <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => ('/arenda-ofisa/page'+page)" style="margin-top: 12px;justify-content: center;" />
       </div>
 
     </div>
@@ -130,6 +141,7 @@
           <largeItem :item="row1" />
         </div>
         <UCard :ui="{ body: { base: 'grid grid-cols-1' } }" style="padding-left: 6px; padding-right: 6px;" class="nomobile">
+
         <lincMetro url="arenda-ofisa" style="margin-top: 8px;width: 100%;" />
       </UCard>
 
