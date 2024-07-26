@@ -1,8 +1,8 @@
 <script setup>
+import { onMounted } from 'vue'
 const isOpen = ref(false)
 const accountForm = reactive({
-  name: undefined,
-  username: undefined,
+  ulitca: undefined,
   plin:undefined,
   plout:undefined,
   cenain:undefined,
@@ -18,6 +18,41 @@ const items = [{
   label: 'Продажа',
   description: 'Change your password here. After saving, you\'ll be logged out.'
 }]
+watch( () => accountForm.plin, () => {
+  console.log('ddddddddddddddd')
+  localStorage.setItem('findFilter',JSON.stringify(accountForm))
+})
+watch( () => accountForm.plout, () => {
+  localStorage.setItem('findFilter',JSON.stringify(accountForm))
+})
+watch( () => accountForm.cenain, () => {
+  localStorage.setItem('findFilter',JSON.stringify(accountForm))
+})
+watch( () => accountForm.cenaout, () => {
+  localStorage.setItem('findFilter',JSON.stringify(accountForm))
+})
+
+watch( () => accountForm.ulitca, () => {
+  localStorage.setItem('findFilter',JSON.stringify(accountForm))
+})
+const clearFilter = ()=>{
+  accountForm.ulitca = undefined
+  accountForm.plin = undefined
+  accountForm.plout = undefined
+  accountForm.cenain = undefined
+  accountForm.cenaout = undefined
+  localStorage.setItem('findFilter',null)
+}
+onMounted(() => {
+  if(localStorage.getItem('findFilter')){
+    const findOb = JSON.parse(localStorage.getItem('findFilter'))
+    accountForm.ulitca = findOb.ulitca
+    accountForm.plin = findOb.plin
+    accountForm.plout = findOb.plout
+    accountForm.cenain = findOb.cenain
+    accountForm.cenaout = findOb.cenaout
+  }
+})
 </script>
 <template>
     <UModal v-model="isOpen" prevent-close>
@@ -107,7 +142,7 @@ const items = [{
                       <div class="inputFind">
                         <div  style="flex: 1 auto;">
                           <div style="padding-left: 12px;">Улица</div>
-                          <UInput size="xl" variant="none" v-model="accountForm.name" placeholder="Назание Улици или часть названия" style="width: 100%;" />
+                          <UInput size="xl" variant="none" v-model="accountForm.ulitca" placeholder="Назание Улици или часть названия" style="width: 100%;" />
                         </div>
                       </div>
                       <div class="inputFind">
@@ -135,7 +170,7 @@ const items = [{
               </div>
               <div style="text-align: center;margin-top: 12px;">
                 <UButton size="xl" color="gray">Подобрать</UButton>
-              
+                <div style="font-size: 22px;line-height: 48px;color: white;cursor: pointer;"  @click="clearFilter">Сбросить</div>
               </div>
             </template>
         </UTabs>
