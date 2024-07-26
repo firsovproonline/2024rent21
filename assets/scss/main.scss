@@ -155,7 +155,7 @@ padding-bottom: 4px;
   }
   .adrInfo{
     position: absolute;
-    z-index: 444;
+    z-index: 2;
     background-color: #1c1d1e3b;
     color: beige;
 
@@ -176,4 +176,14 @@ padding-bottom: 4px;
 .padding0{
     padding-left: 0px !important;
     padding-right: 0px !important;
+}
+.h23{
+    line-height: 32px;
+}
+.linkFindSpeed{
+    h1{
+        color: #000000;
+        font-weight: bolder;
+        line-height: 32px;
+    }
 }

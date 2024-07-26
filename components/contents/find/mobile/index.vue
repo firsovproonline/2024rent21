@@ -1,4 +1,5 @@
 <script setup>
+const isOpen = ref(false)
 const accountForm = reactive({
   name: undefined,
   username: undefined,
@@ -19,6 +20,57 @@ const items = [{
 }]
 </script>
 <template>
+    <UModal v-model="isOpen" prevent-close>
+      <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }" style="min-height: 98vh;">
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Быстрый поиск
+            </h3>
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+          </div>
+        </template>
+
+        <div class="linkFindSpeed">
+          <h1>Офисная недвижимость</h1>
+          <div style="padding-left: 12px;">
+            <div class="h23"><a href="/arenda-ofisa">Аренда офисных помещений</a></div>
+            <div class="h23"><a href="/prodazha-ofisy">Продажа офисов</a></div>
+            <div class="h23"><a href="/arenda-osobnyak">Aренда особняков</a></div>
+            <div class="h23"><a href="/prodazha-osobnyak">Продажа особняков</a></div>
+            <div class="h23"><a href="/arenda-gostinitsa">Аренда помещений под Гостиницу</a></div>
+            <div class="h23"><a href="/arenda-bank">Аренда помещений под банк</a></div>
+            <div class="h23"><a href="/prodazha-bank">Продажа помещений под банк</a></div>
+            <div class="h23"><a href="/biznes-centry-moskva">Бизнес Центры Москвы</a></div>        
+          </div>
+        </div>
+        <div class="linkFindSpeed">
+            <h1>Торговая недвижимость</h1>
+            <div style="padding-left: 12px;">
+              <div class="h23"><a href="/arenda-kafe-restoran">Аренда помещений под Кафе, Ресторан</a></div>
+              <div class="h23"><a href="/arenda-magazina">Аренда помещений под магазин</a></div>
+              <div class="h23"><a href="/prodazha-kafe-restoran">Продажа помещений под Ресторан</a></div>
+              <div class="h23"><a href="/arenda-psn">Аренда ПСН</a></div>
+              <div class="h23"><a href="/prodazha-psn">Продажа ПСН</a></div>
+              <div class="h23"><a href="/torgovye-centry">Торговые центры</a></div>
+              <div class="h23"><a href="/arenda-medicinskij-centr">Аренда медицинский центер</a></div>
+            </div>
+        </div>     
+        <div class="linkFindSpeed">
+            <h1>Складская недвижимость</h1>
+            <div style="padding-left: 12px;">
+              <div class="h23"><a href="/arenda-sklada-moskva">Аренда склада в Москве</a></div>
+              <div class="h23"><a href="/arenda-sklad-moskovskaya-oblast">Аренда склада в Московской области</a></div>
+              <div class="h23"><a href="/skladskie-kompleksy">Cкладские комплексы</a></div>
+              <div class="h23"><a href="/otvetstvennoe-hranenie">Ответственное хранение</a></div>
+              <div class="h23"><a href="/arenda-pomeshhenij-pod-proizvodstvo">Аренда помещений под производство</a></div>
+              <div class="h23"><a href="/аrenda-holodilnyh-i-morozilnyh-skladov">Аренда холодильных и морозильных складов</a></div>
+              <div class="h23"><a href="/arenda-otkrytoj-ploshhadki">Аренда открытой площадки</a></div>
+              <div class="h23"><a href="/prodazha-sklada">Продажа складов</a></div>
+            </div>
+        </div>               
+      </UCard>
+    </UModal>  
     <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="background-color: #00668bb8; padding-top: 4px;margin-top: 7px;margin-right: 8px;margin-left: 8px;" >
         <UTabs :items="items" class="w-full">
             <template #item="{ item }">
@@ -77,9 +129,9 @@ const items = [{
 
                   </template>
               </UCard>
-              <div style="display: flex;color: white;align-items: center;margin-top: 8px;cursor:pointer;">
+              <div style="display: flex;color: white;align-items: center;margin-top: 8px;cursor:pointer;" @click="isOpen = true">
                 <UIcon name="i-heroicons-adjustments-horizontal" class="w-12 h-12" />
-                <div style="font-size: 22px;">Выбор категории</div>
+                <div style="font-size: 22px;">Быстрый поиск</div>
               </div>
               <div style="text-align: center;margin-top: 12px;">
                 <UButton size="xl" color="gray">Подобрать</UButton>
