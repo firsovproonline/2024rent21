@@ -7,10 +7,8 @@ const { $viewport } = useNuxtApp()
     if($viewport.isLessThan('tablet')){
             mobile = true
     }
-    watch($viewport.breakpoint, (newBreakpoint, oldBreakpoint) => {
-        console.log('Breakpoint updated:', oldBreakpoint, '->', newBreakpoint)
-    })
 
+//console.log('mobile',mobile)
 
     const items = computed(()=>{
       return  [

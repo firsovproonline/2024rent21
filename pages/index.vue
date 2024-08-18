@@ -107,9 +107,69 @@
       <div v-if="$viewport.isLessThan('tablet')" >
        
           <findMobile />
+          <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin: 8px; padding: 0px !important;background-color: #253a4f17;background-image: url('/img/ofis2BG.png');background-size: cover;background-position: center;"  >
+          <div>
+            <div style="min-height: 220px;" class="divM">
+                <h1 style="color: #bb6509;">Офисная недвижимость</h1>
+                <div style="padding-left: 8px;padding-top: 8px;">
+                  <div><a href="/arenda-ofisa" class="divM">Аренда офисных помещений</a></div>
+                  <div><a href="/prodazha-ofisy">Продажа офисов</a></div>
+                  <div><a href="/arenda-osobnyak">Aренда особняков</a></div>
+                  <div><a href="/prodazha-osobnyak">Продажа особняков</a></div>
+                  <div><a href="/arenda-gostinitsa">Аренда помещений под Гостиницу</a></div>
+                  <div><a href="/arenda-bank">Аренда помещений под банк</a></div>
+                  <div><a href="/prodazha-bank">Продажа помещений под банк</a></div>
+                  <div><a href="/biznes-centry-moskva">Бизнес Центры Москвы</a></div>
+                  <div><a href="/arenda-ofisa/metro">Аренда офисов по метро</a></div>
+
+                </div>
+            </div>
+          
+          </div>
+        </UCard>
+        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin: 8px; padding: 0px !important;background-color: #253a4f17;background-image: url('/img/magazin1BG.png');background-size: cover;"  >
+          <div>
+            <div style="min-height: 220px;" class="divM">
+              <h1 style="color: #bb6509;">Торговая недвижимость</h1>
+              <div style="padding-left: 8px;padding-top: 8px;">
+                <div><a href="/arenda-kafe-restoran">Аренда помещений под Кафе, Ресторан</a></div>
+                <div><a href="/arenda-magazina">Аренда помещений под магазин</a></div>
+                <div><a href="/prodazha-kafe-restoran">Продажа помещений под Ресторан</a></div>
+                <div><a href="/arenda-psn">Аренда ПСН</a></div>
+                <div><a href="/prodazha-psn">Продажа ПСН</a></div>
+                <div><a href="/torgovye-centry">Торговые центры</a></div>
+                <div><a href="/arenda-medicinskij-centr">Аренда медицинский центер</a></div>
+              </div>  
+            </div>
+          
+          </div>
+        </UCard>
+        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin: 8px; padding: 0px !important;background-color: #253a4f17;background-image: url('/img/skladBG.png');background-size: cover;"  >
+          <div>
+            <div style="min-height: 220px;" class="divM">
+              <h1 style="color: #bb6509;">Складская недвижимость</h1>
+              <div style="padding-left: 8px;padding-top: 8px;">
+                <div><a href="/arenda-sklada-moskva">Аренда склада в Москве</a></div>
+                <div><a href="/arenda-sklad-moskovskaya-oblast">Аренда склада в Московской области</a></div>
+                <div><a href="/skladskie-kompleksy">Cкладские комплексы</a></div>
+                <div><a href="/otvetstvennoe-hranenie">Ответственное хранение</a></div>
+                <div><a href="/arenda-pomeshhenij-pod-proizvodstvo">Аренда помещений под производство</a></div>
+                <div><a href="/аrenda-holodilnyh-i-morozilnyh-skladov">Аренда холодильных и морозильных складов</a></div>
+                <div><a href="/arenda-otkrytoj-ploshhadki">Аренда открытой площадки</a></div>
+                <div><a href="/prodazha-sklada">Продажа складов</a></div>
+              </div>
+            </div>
+          
+          </div>
+        </UCard>
+
+
 
         <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
-          <mobileItem :row="row" />
+
+          <mobileItem :row="row" :template="1"/>
+
+
         </div>
         <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => ('/arenda-ofisa/page'+page)" style="margin-top: 12px;justify-content: center;" />
       </div>
@@ -173,5 +233,11 @@ li {
 
 .grid{
   padding: 4px;
+}
+
+
+.divM a{
+  color: #004e69;
+  font-weight: bolder;
 }
 </style>

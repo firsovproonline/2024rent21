@@ -1,5 +1,6 @@
 // @ts-ignore
 export default defineNuxtPlugin((nuxtApp) => {
+  /*
     const checkError = (error) => {
       const messages = [
         "Importing a module script failed", // safari
@@ -25,4 +26,5 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.$router.onError((error) => {
       checkError(error);
     });
+    */
   });

@@ -29,7 +29,7 @@ export default {
 
         }else{
             if(img[0])
-                return await rotate(img[0].IMG,800,null)
+                return await rotate(img[0].IMG,400,null)
             else
                 return null
 

@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from 'vue';
     const map =ref(null) 
     const props = defineProps({
         row: {
@@ -8,12 +9,14 @@
     });    
     useHead({
         script: [
-            { src: 'https://api-maps.yandex.ru/v3/?apikey=80f1ab75-f93f-476a-ab4c-4f8de2496f76&lang=ru_RU' }
+            //{ src: 'https://api-maps.yandex.ru/v3/?apikey=80f1ab75-f93f-476a-ab4c-4f8de2496f76&lang=ru_RU' }
         ],        
     }) 
+
     onMounted((w) => {
         setTimeout(()=>{
-            const {YMap, YMapDefaultSchemeLayer,YMapMarker,YMapDefaultFeaturesLayer} = ymaps3       
+            const {YMap, YMapDefaultSchemeLayer,YMapMarker,YMapDefaultFeaturesLayer} = ymaps3   
+            window.ymapRent21 =   ymaps3 
             const mapY = new YMap(
                 map.value,
                 {
@@ -46,7 +49,9 @@
             `
             markerElement.className = 'marker-class';
             mapY.addChild(new YMapMarker({type: 'buildings',coordinates: [props.row.LAT, props.row.LNG]}, markerElement));    
-        },100)
+        },200)
+
+        
     })        
 </script>
 <template>

@@ -8,6 +8,10 @@
         infoUrl:{
             type: String,
             default:'/ofisnaya-nedvizhimost/'
+        },
+        template:{
+          type:Number,
+          default: 0
         }         
     });
     //https://static-maps.yandex.ru/v1?ll=37.620070,55.753630&lang=ru_RU&size=450,450&z=13&pt=37.620070,55.753630,pmwtm1~37.64,55.76363,pmwtm99&apikey=YOUR_API_KEY
@@ -21,12 +25,18 @@
         items.push('/api/photo?puid='+item.PUID+'&title='+item.NAME)
     })
     const route = useRoute()
-
+    const consoleHitOn =()=>{
+      const route = useRoute()
+      console.log('fffff',route)
+      navigateTo(props.infoUrl+props.row.ID)
+    }
+    const metro = Object.values(JSON.parse(props.row.METRO))
+    //console.log(metro )
 </script>
 <template>
-  <div :class=" row.ID % 2 === 0 ? 'ring-gray-200 shadow  row rborderN':'ring-gray-200 shadow  row rborderN'" style="padding-top: 4px;margin-top: 7px;margin-right: 8px;margin-left: 8px;" >
-    <div class="col" style="text-align: -webkit-center;" >
-      <div :ui="{ body: { base: 'grid grid-cols-1 ffSr' } }" style="width: 100%;">
+  <div :class=" row.ID % 2 === 0 ? 'ring-gray-200 shadow  row rborderN ':'ring-gray-200 shadow  row rborderN '" style="padding-top: 4px;margin-top: 7px;margin-right: 8px;margin-left: 8px;width: 95vw;"  v-on:click="consoleHitOn" >
+    <div class="col" style="text-align: -webkit-center;">
+      <div v-if="template==0" :ui="{ body: { base: 'grid grid-cols-1 ffSr' } }" style="width: 100%;">
         <div class="adrInfo" v-on:dblclick="consoleHitOn">
               <div>Город {{ row.GOROD }} </div>
               <div>{{ row.ULITCA }} {{ row.DOM }} </div>
@@ -57,10 +67,10 @@
         </UCarousel>
 
       <div>
-  <div style="display: flex;justify-content: space-between;align-items: flex-end;margin-top: 6px;">
+  <NuxtLink style="display: flex;justify-content: space-between;align-items: flex-end;margin-top: 6px;" :to="infoUrl+row.ID" >
                 <div>
                   <div style="display: flex;align-items: center;">
-                    <div class="value">{{ row.OPP }} {{ row.TIP }} площадь {{ row.PL1 }} м<sup>2</sup></div>
+                    <div class="value" style="color: #bb6509;">{{ row.OPP }} {{ row.TIP }} площадь {{ row.PL1 }} м<sup>2</sup></div>
                   </div>
                   <div style="display: flex;align-items: center;">
                     <div class="value">Цена аренды в месяц {{ row.CENA_AR_MES_ALL }} руб.</div>
@@ -71,9 +81,9 @@
                   </div>
                 </div>
                 <div>
-                  <UButton color="white" block :to="infoUrl+row.ID">Подробнее</UButton>
+                  <div color="white" >презнтация / заявка</div>
                 </div>
-              </div>
+              </NuxtLink>
 </div>
 
 <!--
@@ -149,6 +159,56 @@
 
 -->
       </div>
+      <div v-if="template==1"  >
+        <div>
+          <div style="display: flex;align-items: center;font-weight: bolder;">
+            <div class="value" style="color: #bb6509;">{{ row.OPP }} {{ row.TIP }} площадь {{ row.PL1 }} м<sup style="color: #bb6509;">2</sup></div>
+          </div>
+          <div style="display: flex;align-items: center;">
+            <div class="value">Цена аренды в месяц {{ row.CENA_AR_MES_ALL }} руб.</div>
+          </div>
+
+          <div style="display: flex;align-items: center;">
+            <div class="value">Этаж {{ row.ETAG }}</div>
+          </div>
+        </div>
+
+
+        <UCarousel style="min-width: 100%;max-width: 100%;margin-top: 6px;" ref="carouselRef"
+          :items="items"
+          :ui="{
+            item: 'basis-full',
+            container: 'rounded-lg',
+            indicators: {
+              wrapper: 'relative bottom-0 mt-4 fotoInd'
+            }
+          }"
+          indicators
+          class="w-64 mx-auto"
+        >
+          <template #default="{ item }">
+            <div :src="item" draggable="false" :style="'background-color:#8080804a;background-image: url(\''+item+'\');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
+          </template>
+
+          <template #indicator="{ onClick, page, active }">
+            <UButton color="gray" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" style="margin-right: 4px;" @click="onClick(page)" />
+          </template>
+        </UCarousel>
+        <div class="adrInfo1 divPclick" style="display: flex;justify-content: space-between;align-items: flex-start;">
+          <div style="margin-top: 6px;">
+            <div>Город {{ row.GOROD }} </div>
+            <div>{{ row.ULITCA }} {{ row.DOM }} </div>
+            <div>{{ row.NALOGNAME }}</div>
+            <div>{{ row.TIPZD }}</div>
+            <div>Класс {{ row.KLASS }}</div>
+          </div>
+        </div>
+        <hr style="margin-top: 6px;"/>
+        <div class="adrInfo1 divPclick" style="display: flex;flex-wrap: wrap;margin-top: 8px;">
+          <div v-for="metroItem in metro" :key="metroItem.METRO" style="margin-right: 6px;">{{ metroItem.METRO }}</div>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -179,6 +239,11 @@
 .rborderN1 * {
   color: #fffaf0;
 }
+.adrInfo1{
+  text-align: left;
+}
 
-
+.blClick .divPclick11{
+  pointer-events: none;
+}
 </style>

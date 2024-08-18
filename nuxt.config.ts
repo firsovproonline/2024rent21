@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     preference: 'light'
   },
   //builder: 'webpack',
+//  extends: ['nuxt-modal'],
   app: {
     head: {
       meta: [
@@ -16,7 +17,8 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
       script: [
-          
+        { src: 'https://api-maps.yandex.ru/v3/?apikey=80f1ab75-f93f-476a-ab4c-4f8de2496f76&lang=ru_RU' },
+        { src: '/js/dhtmlx/codebase/dhtmlx.js' }
       ],
       link: [
       ],
@@ -108,11 +110,12 @@ export default defineNuxtConfig({
     
   ],
   css: [
+    '@/assets/css/terrace/dhtmlx.css',    
     '@/assets/scss/main.scss',
   ],
   modules: [
+    'nuxt-viewport',
     '@nuxt/ui',
-    'nuxt-viewport'
     //'@sidebase/nuxt-auth',
   ],
   build: {
