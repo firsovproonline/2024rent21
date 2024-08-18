@@ -21,6 +21,7 @@
     import rformSmall from '/components/contents/requestForm/small'
 
     const { $viewport } = useNuxtApp()
+//    console.log(useNuxtApp())
     let rows =null
     const page = ref(1)
     let PopularRows = null
