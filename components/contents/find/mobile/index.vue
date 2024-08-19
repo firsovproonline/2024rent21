@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import mwin from '/components/ui/DhtmlxWindow.vue'
+import Modal from '@/components/ui/modal'
 const isOpen = ref(false)
 const isModalOpen = ref(false)
 const accountForm = reactive({
@@ -44,6 +45,15 @@ const clearFilter = ()=>{
   accountForm.cenaout = undefined
   localStorage.setItem('findFilter',null)
 }
+let isShowModal = ref(false)
+const toggleModal = ()=>{
+  isShowModal.value = !isShowModal.value
+}
+
+const clickModal = ()=>{
+  //isOpen.value = true
+  isShowModal.value = true
+}
 onMounted(() => {
   
   if(localStorage && localStorage.getItem('findFilter')){
@@ -60,13 +70,19 @@ onMounted(() => {
 })
 </script>
 <template>
-  <!---->
-    <UModal  v-model="isOpen" :ui="{fullscreen: 'w-screen h-screen',width: 'w-full sm:max-w-lg',}">
 
-
-
-
-
+<Modal
+      v-show="isShowModal"
+      :show="isShowModal"
+      :scrollable="true"
+      header-id="modalHeader"
+      body-id="modalBody"
+      @close="toggleModal"
+    >
+      <template #header>
+        Быстрый поиск
+      </template>
+      <template #body>
 
         <div class="linkFindSpeed">
           <h1>Офисная недвижимость</h1>
@@ -81,6 +97,8 @@ onMounted(() => {
             <div class="h23"><NuxtLink href="/biznes-centry-moskva">Бизнес Центры Москвы</NuxtLink></div>        
           </div>
         </div>
+
+                <!--
         <div class="linkFindSpeed">
             <h1>Торговая недвижимость</h1>
             <div style="padding-left: 12px;">
@@ -105,10 +123,14 @@ onMounted(() => {
               <div class="h23"><NuxtLink href="/arenda-otkrytoj-ploshhadki">Аренда открытой площадки</NuxtLink></div>
               <div class="h23"><NuxtLink href="/prodazha-sklada">Продажа складов</NuxtLink></div>
             </div>
-        </div>               
+        </div>  
 
+        -->
 
-    </UModal>  
+      </template>
+    </Modal>
+
+  <!---->
     <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="background-color: #00668bb8; padding-top: 4px;margin-top: 7px;margin-right: 8px;margin-left: 8px;" >
         <UTabs :items="items" class="w-full">
             <template #item="{ item }">
@@ -167,7 +189,7 @@ onMounted(() => {
 
                   </template>
               </UCard>
-              <div style="display: flex;color: white;align-items: center;margin-top: 8px;cursor:pointer;" @click="isOpen = true">
+              <div style="display: flex;color: white;align-items: center;margin-top: 8px;cursor:pointer;" @click="clickModal">
                 <UIcon name="i-heroicons-adjustments-horizontal" class="w-12 h-12" />
                 <div style="font-size: 22px;">Быстрый поиск</div>
               </div>
@@ -179,3 +201,9 @@ onMounted(() => {
         </UTabs>
     </UCard>
 </template>
+<style>
+  .flexTop{
+    display: flex;
+    align-items: center !important;
+  }
+</style>
