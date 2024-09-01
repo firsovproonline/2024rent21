@@ -21,16 +21,15 @@ const ob={
     pageType: 1,
     titleMobile:rem
 }
-console.log(definePageMeta(
+
+definePageMeta(
   {
     layout: 'universal',
     pageType: 1,
     titleMobile: 'ddddd'
     }
+)
 
-    
-)
-)
 
 </script>
 <template>

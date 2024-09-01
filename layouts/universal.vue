@@ -1,5 +1,9 @@
 <script setup>
-const route = useRoute()
+const route = await useRoute()
+
+
+const router = await useRouter()
+
 import sfooter from '/components/contents/footer'
 import { useNuxtApp } from '#app'
 const { $viewport } = useNuxtApp()
@@ -7,8 +11,6 @@ const { $viewport } = useNuxtApp()
     if($viewport.isLessThan('tablet')){
             mobile = true
     }
-
-//console.log('mobile',mobile)
 
     const items = computed(()=>{
       return  [
@@ -66,7 +68,7 @@ const { $viewport } = useNuxtApp()
                    
                 </div>            
             </div>
-            <div><h1 style="text-align:center">{{ route.matched[0].meta.titleMobile }}</h1></div>
+            <div><h1 style="text-align:center">{{ router.currentRoute.value.meta.meta.titleMobile }}</h1></div>
             <div>
                 <UDropdown  :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
                     <UIcon name="i-heroicons-bars-3" style="width: 28px;height: 28px;" />
@@ -102,13 +104,13 @@ const { $viewport } = useNuxtApp()
             </div>            
         </div>
         <div style="width: 18px;"></div>
-        <div>
-            <div>
-                <h1>{{ route.matched[0].meta.title }}</h1>							
-                <div class="module" ><p>{{ route.matched[0].meta.description }}</p></div>
+        <div style="display: flex;flex-wrap: wrap;align-items: stretch;align-content: space-between;">
+            <div v-if="router.currentRoute.value.meta.meta">
+                <h1 class="sh1">{{ router.currentRoute.value.meta.meta.title }}</h1>							
             </div>
+            <div v-if="router.currentRoute.value.meta.meta" class="module" ><p>{{ router.currentRoute.value.meta.meta.description }}</p></div>
 
-            <div>
+            <div style="flex: 1 auto;">
                 <div style="display: flex;justify-content: flex-start;margin-top: 8px;" class="menurentH">
                 <div class="item item3">
                     <a href="/ofisnaya-nedvizhimost">Офисная недвижимость</a>
@@ -249,4 +251,14 @@ const { $viewport } = useNuxtApp()
     </div>
 
 </template>
-<style></style>
+<style scoped>
+    .item3{
+        flex: 1 auto;
+    }
+    .sh1{
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        unicode-bidi: isolate;
+    }
+</style>

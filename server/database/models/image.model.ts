@@ -3,7 +3,8 @@ import connectionMysql from '../config/mysqlPhoto';
 import gm from 'gm'
 function rotate (readStream,w,h) {
     return new Promise(function (resolve, reject) {
-        gm(readStream, '1111.jpg')
+        //console.log(readStream)
+        gm(readStream)
             // @ts-ignore
         .resize(w*2,h*2)
         .toBuffer('webp',  (err, buffer)=> {
@@ -24,15 +25,18 @@ export default {
         if(params.size =='small'){
             if(img[0])
                 return await rotate(img[0].IMG,90,160)
-            else
+            else{
+                //console.log(img)
                 return null
+            }
 
         }else{
             if(img[0])
                 return await rotate(img[0].IMG,400,null)
-            else
+            else{
+                //console.log(img)
                 return null
-
+            }
         }
 
     }

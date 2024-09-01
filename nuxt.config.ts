@@ -113,11 +113,8 @@ export default defineNuxtConfig({
     '@/assets/css/terrace/dhtmlx.css',    
     '@/assets/scss/main.scss',
   ],
-  modules: [
-    'nuxt-viewport',
-    '@nuxt/ui',
-    //'@sidebase/nuxt-auth',
-  ],
+  modules: ['nuxt-viewport', //'@sidebase/nuxt-auth',
+  '@nuxt/ui'],
   build: {
     cssCodeSplit: false,
     extractCSS: false 

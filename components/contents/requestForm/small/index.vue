@@ -24,6 +24,9 @@
             <UFormGroup class="fgroup" :ui="{label: {  wrapper: 'flex stw'} }" label="Тип" name="tip">
                 <USelect v-model="news.tip" :options="TipList" />
             </UFormGroup>
+            <div style="display: flex;justify-content: center;margin-top: 8px;">
+                <UButton color="gray">Отправить заявку</UButton>
+            </div>
         </UForm>
 
     </UCard>    
