@@ -1,7 +1,6 @@
 <script setup>
 import smap from '/components/contents/find/map/yandex/all/index.vue'
 import callPromo from '/components/contents/callPromo'
-import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
 import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
 import rformSmall from '/components/contents/requestForm/small'
 import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
