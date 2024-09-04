@@ -107,6 +107,7 @@ const { $viewport } = useNuxtApp()
         <div style="display: flex;flex-wrap: wrap;align-items: stretch;align-content: space-between;">
             <div v-if="router.currentRoute.value.meta.meta">
                 <h1 class="sh1">{{ router.currentRoute.value.meta.meta.title }}</h1>							
+                <div class="module" ><p>Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы</p></div>
             </div>
             <div v-if="router.currentRoute.value.meta.meta" class="module" ><p>{{ router.currentRoute.value.meta.meta.description }}</p></div>
 

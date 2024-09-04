@@ -27,7 +27,7 @@ useHead({
         }          
     });
     const page = ref(1)
-    const nextUrl = '/arenda-ofisa'
+    const nextUrl = '/prodazha-ofisy'
     const findQuery = {
         page: page.value,
         perPage: 10,
