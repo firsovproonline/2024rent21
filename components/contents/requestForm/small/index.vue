@@ -10,7 +10,7 @@
     })
 </script>
 <template>
-    <UCard :ui="{ label: { base: 'grid grid-cols-1 px-1'} }" style="margin-bottom: 12px;"  >
+    <UCard :ui="{ label: { base: 'grid grid-cols-1 px-1'} ,divide: 'divide-y divide-gray-200 dark:divide-gray-800 borderRed bGrey'}" style="margin-bottom: 12px;"  >
         <UForm :state="news" class="space-y-1" >
             <UFormGroup class="fgroup" :ui="{label: {  wrapper: 'flex stw'} }" label="Имя" name="title">
                 <UInput class="finput" v-model="news.title" />

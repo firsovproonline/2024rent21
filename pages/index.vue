@@ -21,7 +21,7 @@
 
     import callPromo from '/components/contents/callPromo'
     import rformSmall from '/components/contents/requestForm/small'
-
+    import bigFind from '/components/contents/find/big/index.vue'
     const { $viewport } = useNuxtApp()
 //    console.log(useNuxtApp())
     let rows =null
@@ -71,7 +71,7 @@
  СРОЧНЫЙ ПОИСК И ПОДБОР ОФИСНЫХ ПОМЕЩЕНИЙ В МОСКВЕ! 
  Консалтинг, Брокеридж и Реклама Коммерческой недвижимости Москвы 
   
- Если вам или вашей фирме требуется быстро найти и снять офис в Москве, ЗВОНИТЕ   Тел : 8 (495) 500-75-11  Наши специалисты помогут вам  снять офис или другую коммерческую недвижимость в Москве!.` }
+ Если вам или вашей фирме требуется быстро найти и снять офис в Москве, <span style="color:red">ЗВОНИТЕ   Тел : 8 (495) 500-75-11</span>  Наши специалисты помогут вам  снять офис или другую коммерческую недвижимость в Москве!.` }
       ],
       bodyAttrs: {
         class: 'test'
@@ -83,14 +83,17 @@
   <div style="display: flex;">
     <div>
       <div  v-if="!$viewport.isLessThan('tablet')">
+        <bigFind />
+        <div style="height: 12px;"></div>
         <findLinc tip="ALL"  />
+        <div style="height: 12px;"></div>
         <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin-bottom: 12px; padding: 0px !important;"  >
         <div class="findmap">
           <div v-if="!$viewport.isLessThan('tablet')" class="header" >
             <p><strong><span style="font-family: 'times new roman', times; font-size: small;">БОЛЬШОЙ ВЫБОР АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ПО АРЕНДЕ ОФИСОВ И ОСОБНЯКОВ, СКЛАДОВ И ОБЪЕКТОВ ТОРГОВОЙ НЕДВИЖИМОСТИ В МОСКВЕ.</span></strong></p>
             <p><span style="font-family: 'times new roman', times; font-size: small;">Также представлены в большом колличестве предложения: Аренда офиса без комиссии от собственника</span></p>
             <p><strong><span style="font-family: 'times new roman', times; font-size: small;">СРОЧНЫЙ ПОИСК И ПОДБОР ОФИСНЫХ, СКЛАДСКИХ И ТОРГОВЫХ ПОМЕЩЕНИЙ В МОСКВЕ!</span></strong></p>
-            <p><span style="font-family: 'times new roman', times; font-size: small;">Если вам или вашей фирме требуется быстро найти и снять офис в Москве, </span><span style="color: #ff0000;"><strong>ЗВОНИТЕ Тел.: 8 (495) 135-10-11</strong></span></p>
+            <p><span style="font-family: 'times new roman', times; font-size: small;">Если вам или вашей фирме требуется быстро найти и снять офис в Москве, </span><span style="color: #ff0000;"><strong style="color:#ff0000">ЗВОНИТЕ Тел.: 8 (495) 135-10-11</strong></span></p>
             <p><span style="font-family: 'times new roman', times; font-size: small;">Наши специалисты помогут оперативно вам снять офис и другую коммерческую недвижимость в Москве!</span></p>
             <p><span style="font-family: 'times new roman', times; font-size: small;">&nbsp;</span></p>
           </div>

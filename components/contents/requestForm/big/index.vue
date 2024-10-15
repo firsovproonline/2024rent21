@@ -10,7 +10,7 @@
     })
 </script>
 <template>
-    <UCard :ui="{ label: { base: 'grid grid-cols-1 px-1'} }" style="margin-bottom: 12px;"  >
+    <UCard :ui="{ label: { base: 'grid grid-cols-1 px-1'} ,divide: 'divide-y divide-gray-200 dark:divide-gray-800 borderRed bGrey'}" style="margin-bottom: 12px;"  >
         <h1 style="color: red;text-align: center;">По вопросам аренды и просмотра звоните по тел:</h1>
         <h1 style="color: black;text-align: center;">(495) 135-10-11</h1>
         <h1 style="color: black;text-align: center;">(495) 135-10-11 Роман</h1>

@@ -30,3 +30,7 @@
     flex: 1 auto;
     width: 100%;
 }
+
+.testFrame{
+    width: 100% !important    
+}
