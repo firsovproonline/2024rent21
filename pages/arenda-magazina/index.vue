@@ -1,122 +1,103 @@
 <script setup>
-    import logo from '/components/contents/logo'
-    import headerMenu from '/components/contents/headerMenu'
+    import smap from '/components/contents/find/map/yandex/all/index.vue'
     import callPromo from '/components/contents/callPromo'
-    import sfooter from '/components/contents/footer'
-    import findLinc from '/components/contents/find/linc/tip'
-    import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
+    import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
+    import rformSmall from '/components/contents/requestForm/small'
+    import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
+    import bigFind from '/components/contents/find/big/index.vue'
+    const { $viewport } = useNuxtApp()
+    const nextUrl = '/arenda-magazina'
+    const page = ref(1)
     useHead({
-        title: 'Аренда помещений под кафе, Ресторан  Снять помещение под кафе и Ресторан .',
+        title: 'Аренда помещений под магазин, Снять помещение под магазин .',
         meta: [
-            { name: 'keywords', content: 'Аренда помещений под кафе, Ресторан, Снять помещение под кафе и Ресторан .' },
-            { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
+            { name: 'keywords', content: 'Rent21 - Доска обьявлений  Предложения по аренде магазинов без комиссии от собственников в Торговых Центрах Москвы  Мы помогаем снять магазин в Тороговых Центрах Москвы.' },
+            { name: 'description', content: `Rent21 - Доска обьявлений  Предложения по аренде магазинов без комиссии от собственников в Торговых Центрах Москвы  Мы помогаем снять магазин в Тороговых Центрах Москвы.` }
         ]
     })
-    const route = useRoute()
     definePageMeta({
-        layout: 'empty',
+        layout: 'universal',
+        meta: {
+            titleMobile:'Аренда помещений под магазин'
+        }          
     });
-    const page = ref(1)
-    if(route.params.page) page.value = route.params.page*1
-    const rowsGet = ref({})
-    const nextUrl = '/arenda-magazina'
-
     const findQuery = {
         page: page.value,
         perPage: 10,
         OPP: 'Аренда',
         TIP: 'Торговая площадь',
     }
-    rowsGet.value = await $fetch( `/api/im_object`, {
+    let rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: findQuery
     })
     const total = computed(()=>{
-        return rowsGet.value.total
+        return rows.total
     })
-    const rows = computed(()=>{
-        return rowsGet.value.rows
-    })
-
-    watch( () => page.value, () => {
-       findQuery.page = page.value
-        $fetch( `/api/im_object`, {
-            method: 'GET',
-            params: findQuery
-        }).then(item=>{
-            rowsGet.value = item
-        })
-    })
-
-
 </script>
 <template>
-    <div style="padding-left: 1px;padding-right: 1px;">
-        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="padding: 3px !important;margin-top: 6px;"  >
+    <div v-if="$viewport.isLessThan('tablet')">
+        <div>
+            <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+
+                <mobileItem :row="row" :template="1"/>
+
+
+            </div>
+            <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />        
+        </div>
+
+    </div> 
+    <div v-else>
         <div style="display: flex;">
-            <logo style="margin-top: 6px;" />
-            <div style="width: 18px;"></div>
             <div>
-                <h1>Аренда помещений под кафе, Ресторан, Снять помещение под кафе и Ресторан.</h1>							
-                <div class="module" style="max-width: 690px;"><p>Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы</p></div>
-                <headerMenu style="flex: 1 auto;"/>
+                <UCard :ui="{ body: { base: 'grid grid-cols-3 px-0' } }" style="padding: 0px !important;margin-bottom: 8px;"   >
+                    <div>
+                        <h1>Торговая недвижимость</h1>
+                        
+                        <div><a href="/arenda-kafe-restoran">Аренда помещений под Кафе, Ресторан</a></div>
+                        <div><a href="/arenda-magazina">Аренда помещений под магазин</a></div>
+                        <div><a href="/prodazha-kafe-restoran">Продажа помещений под Ресторан</a></div>
+                        <div><a href="/arenda-psn">Аренда ПСН</a></div>
+                        <div><a href="/prodazha-psn">Продажа ПСН</a></div>
+                        <div><a href="/torgovye-centry">Торговые центры</a></div>
+                        <div><a href="/arenda-medicinskij-centr">Аренда медицинский центер</a></div>
+
+                        
+                    </div>
+                    <div>
+                        <h1>Аренда магазинов по районам</h1>
+                        
+                        <div><a href="/arenda-magazina/cao">Аренда магазина ЦАО</a></div>
+                        <div><a href="/arenda-magazina/uvao">Аренда магазина ЮВАО</a></div>
+                        <div><a href="/arenda-magazina/vao">Аренда магазина ВАО</a></div>
+                        <div><a href="/arenda-magazina/svao">Аренда магазина СВАО</a></div>
+                        <div><a href="/arenda-magazina/sao">Аренда магазина САО</a></div>
+                        <div><a href="/arenda-magazina/szao">Аренда магазина СЗАО</a></div>
+                        <div><a href="/arenda-magazina/zao">Аренда магазина ЗАО</a></div>
+                        <div><a href="/arenda-magazina/uzao">Аренда магазина ЮЗАО</a></div>
+                        <div><a href="/arenda-magazina/uao">Аренда магазина ЮАО</a></div>
+
+                        
+                    </div>
+
+                </UCard>   
+                <bigFind></bigFind>         
             </div>
-        </div>
-        </UCard>
-        <div style="display: flex;">
-            <div style="flex: 1 auto;padding-right: 8px;min-width: 700px;">
-                <findLinc tip="Магазин" />
-            </div>
-            <div style="width: 300px;text-align: -webkit-right;">
+            <div style="min-width: 265px;margin-left: 12px;max-width: 265px;">
                 <callPromo />
-            </div>
-        </div>
-
-
-        <div style="height: 22px;background-color: #e1e1e12e;margin-top: 8px;"></div>
-        <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
-        <div v-for="row in rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" style="margin-top: 12px;" >
-            <largeItem :item="row" />
+                <rformSmall />
+            </div>   
+        </div>  
+        <smap style="margin-bottom: 8px;"></smap>
+        <div v-for="row1 in rows.rows" :key="row1.ID" :class=" row1.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+            <bigItem :item="row1" />
         </div>
         <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
 
-        <UCard :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="padding: 0px !important;margin-top: 12px;"  >
-            <sfooter />
-        </UCard>
     </div>
+
 </template>
 <style>
-html, body {
-                height: 100vh;
-             
-}
-html {
-    display: table;
-    margin: auto;
-}
-body {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 0 auto;
-    
-} 
-#__nuxt{
-    min-width: 960px;
-    max-width: 960px;
 
-    overflow: auto;
-    min-height: 100vh;    
-}
-
-* {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    font-size: 14px;
-    font-family: 'Times New Roman', Times, serif;
-    line-height: 16px;
-}
-h1{
-    font-weight: bolder;
-    color: black;
-}
 </style>

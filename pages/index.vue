@@ -126,7 +126,10 @@
                   <div><a href="/arenda-bank">Аренда помещений под банк</a></div>
                   <div><a href="/prodazha-bank">Продажа помещений под банк</a></div>
                   <div><a href="/biznes-centry-moskva">Бизнес Центры Москвы</a></div>
+                  <!--
                   <div><a href="/arenda-ofisa/metro">Аренда офисов по метро</a></div>
+
+                  -->
 
                 </div>
             </div>

@@ -1,26 +1,24 @@
 <script setup>
-import findLinc from '/components/contents/find/linc/tip'
-import callPromo from '/components/contents/callPromo'
-import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
+    import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
+    import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
+    const { $viewport } = useNuxtApp()
+    const route = useRoute()
+    useHead({
+        title: 'Бизнес Центры Москвы .',
+        meta: [
+            { name: 'keywords', content: 'Бизнес Центры Москвы.' },
+            { name: 'description', content: `Бизнес Центры Москвы.` }
+        ]
 
-
-useHead({
-    title: 'Бизнес Центры Москвы .',
-    meta: [
-        { name: 'keywords', content: 'Бизнес Центры Москвы.' },
-        { name: 'description', content: `Бизнес Центры Москвы.` }
-    ]
-})
-
-
-const route = useRoute()
+    })
     definePageMeta({
-        layout: 'onecol',
+        layout: 'universal',
+        meta: {
+            titleMobile:'Бизнес Центры Москвы'
+        }          
     });
-
     const page = ref(1)
     if(route.params.page) page.value = route.params.page*1
-    const rowsGet = ref({})
     const nextUrl = '/biznes-centry-moskva'
     const findQuery = {
         page: page.value,
@@ -29,40 +27,32 @@ const route = useRoute()
         TIPZD: 'Бизнес-центр',
         GOROD: 'Москва'
     }
-    rowsGet.value = await $fetch( `/api/im_object`, {
+    let rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: findQuery
     })
     const total = computed(()=>{
-        return rowsGet.value.total
+        return rows.total
     })
-    const rows = computed(()=>{
-        return rowsGet.value.rows
-    })
-
-    watch( () => page.value, () => {
-       findQuery.page = page.value
-        $fetch( `/api/im_object`, {
-            method: 'GET',
-            params: findQuery
-        }).then(item=>{
-            rowsGet.value = item
-        })
-    })
-
 </script>
 <template>
-    <div style="display: flex;">
-        <div style="flex: 1 auto;padding-right: 8px;min-width: 700px;">
-            <findLinc tip="Офис" />
+    <div v-if="$viewport.isLessThan('tablet')">
+        <div>
+            <div v-for="row in rows.rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+
+                <mobileItem :row="row" :template="1"/>
+
+
+            </div>
+            <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />        
         </div>
-        <div style="width: 300px;text-align: -webkit-right;">
-            <callPromo />
+
+    </div> 
+    <div v-else>       
+        <div v-for="row1 in rows.rows" :key="row1.ID" :class=" row1.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" >
+            <bigItem :item="row1" />
         </div>
+        <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
+
     </div>
-    <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
-    <div v-for="row in rows" :key="row.ID" :class=" row.ID % 2 === 0 ? 'rowItem rborder':'rowItem rborder1'" style="margin-top: 12px;" >
-        <largeItem :item="row" />
-    </div>
-    <UPagination v-model="page" :page-count="10" :total="total" :to="(page) => (nextUrl+'/page'+page)" style="margin-top: 12px;justify-content: center;" />
 </template>

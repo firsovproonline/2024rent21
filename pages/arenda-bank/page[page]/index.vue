@@ -32,59 +32,6 @@
     const total = computed(()=>{
         return rows.total
     })
-
-
-/*
-import findLinc from '/components/contents/find/linc/tip'
-import callPromo from '/components/contents/callPromo'
-import largeItem from '/components/contents/dbItem/im_object/large/index.vue'
-
-
-useHead({
-    title: 'аренда банковских помещений в Москве, Снять помещение под банк в Москве .',
-    meta: [
-        { name: 'keywords', content: 'аренда банковских помещений в Москве, Снять помещение под банк в Москве.' },
-        { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
-    ]
-})
-
-
-const route = useRoute()
-    definePageMeta({
-        layout: 'onecol',
-    });
-
-    const page = ref(route.params.page*1)
-    page.value = route.params.page*1
-    const rowsGet = ref({})
-    const nextUrl = '/arenda-bank'
-    const findQuery = {
-        page: page.value,
-        perPage: 10,
-        OPP: 'Аренда',
-        TIPP: 'Банк'
-    }
-    rowsGet.value = await $fetch( `/api/im_object`, {
-      method: 'GET',
-      params: findQuery
-    })
-    const total = computed(()=>{
-        return rowsGet.value.total
-    })
-    const rows = computed(()=>{
-        return rowsGet.value.rows
-    })
-
-    watch( () => page.value, () => {
-       findQuery.page = page.value
-        $fetch( `/api/im_object`, {
-            method: 'GET',
-            params: findQuery
-        }).then(item=>{
-            rowsGet.value = item
-        })
-    })
-*/
 </script>
 <template>
     <div v-if="$viewport.isLessThan('tablet')">
