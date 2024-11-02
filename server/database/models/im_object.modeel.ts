@@ -111,26 +111,32 @@ export default {
         //console.log(query)
         const [rows] = await connectionMysql.execute(query);
         //console.log(q.perPage,total)
-        if(q.dopinfo){
+        if(q.dopinfo ){
+            
             //const listMetro = Object.values(JSON.parse(rows[0].METRO))
-            // @ts-ignore
-            const findMetro = rows[0].UNDERGROUND
-            // @ts-ignore  rows[0].LNG
-            let findSql = `select DISTINCT ULITCA from im_objectКtRent21 WHERE TIP='`+rows[0].TIP+`' AND  METRO LIKE '%`+findMetro+`%'`
-            const area = 1.5 / 111
-            findSql = `SELECT
-            DISTINCT ULITCA as RU
-            FROM im_objectКtRent21 
-            WHERE `+rows[0].LNG+` BETWEEN LNG - `+area+` AND LNG + `+area+ ` AND  `+ rows[0].LAT +`BETWEEN LAT - `+area+` AND LAT + `+area
-        
-            const [listUlita] = await connectionMysql.execute(findSql);
-            listUlita.forEach(item=>{
+            if(rows && rows[0] && rows[0].UNDERGROUND){
                 // @ts-ignore
-                item.LATIN = connectionMysql.cyrill_to_latin(item.RU)
-            })
-            //console.log(listUlita)
+                const findMetro = rows[0].UNDERGROUND
+                // @ts-ignore  rows[0].LNG
+                let findSql = `select DISTINCT ULITCA from im_objectКtRent21 WHERE TIP='`+rows[0].TIP+`' AND  METRO LIKE '%`+findMetro+`%'`
+                const area = 1.5 / 111
+                findSql = `SELECT
+                DISTINCT ULITCA as RU
+                FROM im_objectКtRent21 
+                WHERE `+rows[0].LNG+` BETWEEN LNG - `+area+` AND LNG + `+area+ ` AND  `+ rows[0].LAT +`BETWEEN LAT - `+area+` AND LAT + `+area
+            
+                const [listUlita] = await connectionMysql.execute(findSql);
+                listUlita.forEach(item=>{
+                    // @ts-ignore
+                    item.LATIN = connectionMysql.cyrill_to_latin(item.RU)
+                })
+                //console.log(listUlita)
 
-            return {rows: rows as IFace[], total: total[0].total as number, listUlita:listUlita}   ;        
+                return {rows: rows as IFace[], total: total[0].total as number, listUlita:listUlita}   ;        
+
+            }else{
+                return {rows: rows as IFace[], total: total[0].total as number, listUlita:[]}   ;        
+            }
 
         }else{
             const outRows =  rows as IFace[]

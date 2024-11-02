@@ -1,16 +1,16 @@
 <script setup>
-import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
-import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
-const { $viewport } = useNuxtApp()
+    import mobileItem from '/components/contents/dbItem/im_object/mobile/index.vue'
+    import bigItem from '/components/contents/dbItem/im_object/big/index.vue'
+    const { $viewport } = useNuxtApp()
 
-const route = useRoute()
-useHead({
-    title: 'Продажа офисов в Москве, купить офисное помещение в Москве .',
-    meta: [
-        { name: 'keywords', content: 'Продажа офисов в Москве, купить офисное помещение в Москве.' },
-        { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
-    ]
-})
+    const route = useRoute()
+    useHead({
+        title: 'Продажа офисов в Москве, купить офисное помещение в Москве .',
+        meta: [
+            { name: 'keywords', content: 'Продажа офисов в Москве, купить офисное помещение в Москве.' },
+            { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
+        ]
+    })
 
 
     definePageMeta({
@@ -31,15 +31,7 @@ useHead({
         TIP: 'Офис',
         OPP: 'Продажа'
     }
-    /*
-    watch( as () => page.value, () => {
-       findQuery.page = page.value
-        const rows = await $fetch( `/api/im_object`, {
-        method: 'GET',
-        params: findQuery
-        })
-    })
-*/
+
     let rows = await $fetch( `/api/im_object`, {
       method: 'GET',
       params: findQuery
@@ -48,17 +40,6 @@ useHead({
         return rows.total
     })
 
-/*
-    watch( () => page.value, () => {
-       findQuery.page = page.value
-        $fetch( `/api/im_object`, {
-            method: 'GET',
-            params: findQuery
-        }).then(item=>{
-            rowsGet.value = item
-        })
-    })
-*/
 </script>
 <template>
     <div v-if="$viewport.isLessThan('tablet')">

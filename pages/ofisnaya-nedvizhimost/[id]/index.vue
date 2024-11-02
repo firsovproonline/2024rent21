@@ -7,26 +7,29 @@ const item = await $fetch( `/api/im_object`, {
     page: 1,
     perPage: 15,
     id:route.params.id,
-    dopinfo:1,
-    TIP:'Офис'
   }
 })
 const row = item.rows[0]
-//console.log(row)
+console.log(item)
 const rem = computed(()=>{
   return row.REM.split('\n')
 })
-const ob={
-  layout: 'universal',
-    pageType: 1,
-    titleMobile:rem
-}
+
+useHead({
+    title: row.TITLE,
+    meta: [
+        { name: 'keywords', content: row.TITLE},
+        { name: 'description', content: row.TITLE }
+    ]
+})
 
 definePageMeta(
   {
     layout: 'universal',
     pageType: 1,
-    titleMobile: 'ddddd'
+    meta: {
+            titleMobile:'Информация о помещении'
+        }, 
     }
 )
 
