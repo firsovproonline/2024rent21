@@ -48,6 +48,13 @@ export default {
             WHERE += ` (GOROD = '`+q.GOROD+`')`
         }
 
+        if(q.NOTGOROD && q.NOTGOROD !== '' && q.NOTGOROD !== 'undefined'){
+            if (WHERE !== ''){
+                WHERE += ' AND '
+            }
+            WHERE += ` (GOROD <> '`+q.NOTGOROD+`')`
+        }
+
         if(q.LIKEULITCA && q.LIKEULITCA !== '' && q.LIKEULITCA !== 'undefined'){
             if (WHERE !== ''){
                 WHERE += ' AND '
