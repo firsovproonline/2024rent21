@@ -77,6 +77,13 @@ export default {
             WHERE += ` (TIPZD = '`+q.TIPZD+`')`
         }
 
+        if(q.REM && q.REM !== '' && q.REM !== 'undefined'){
+            if (WHERE !== ''){
+                WHERE += ' AND '
+            }
+            WHERE += ` (REM LIKE '%`+q.REM+`%')`
+        }
+
         if(q.TIPP && q.TIPP !== '' && q.TIPP !== 'undefined'){
             if (WHERE !== ''){
                 WHERE += ' AND '
