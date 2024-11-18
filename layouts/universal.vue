@@ -54,7 +54,9 @@ const { $viewport } = useNuxtApp()
         }],
       ]
     })
-
+    const { $rent21 } = useNuxtApp()
+    //if($rent21().titles.top!=='')
+    //    router.currentRoute.value.meta.meta.titleMobile = $rent21().titles.top
 </script>
 <template>
     <div v-if="$viewport.isLessThan('tablet')" >
@@ -68,7 +70,10 @@ const { $viewport } = useNuxtApp()
                    
                 </div>            
             </div>
-            <div><h1 style="text-align:center">{{ router.currentRoute.value.meta.meta.titleMobile }}</h1></div>
+            <div>
+                <h1 v-if="$rent21().titles.top!==''" style="text-align:center">{{ $rent21().titles.top }}</h1>
+                <h1 v-else style="text-align:center">{{ router.currentRoute.value.meta.meta.titleMobile }}</h1>
+            </div>
             <div>
                 <UDropdown  :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
                     <UIcon name="i-heroicons-bars-3" style="width: 28px;height: 28px;" />

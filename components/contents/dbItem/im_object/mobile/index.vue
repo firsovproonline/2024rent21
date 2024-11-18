@@ -205,7 +205,7 @@
         </div>
         <hr style="margin-top: 6px;"/>
         <div class="adrInfo1 divPclick" style="display: flex;flex-wrap: wrap;margin-top: 8px;">
-          <div v-for="metroItem in metro" :key="metroItem.METRO" :style="'margin-right: 6px;'+'color:'+metroItem.color">{{ metroItem.METRO }}</div>
+          <div v-for="metroItem in metro" :key="metroItem.METRO" :style="'margin-right: 6px;'+'color:'+metroItem.color"><span :style="'font-weight: bolder;color:'+metroItem.color">Ⓜ</span>{{ metroItem.METRO }}</div>
 
         </div>
       </div>

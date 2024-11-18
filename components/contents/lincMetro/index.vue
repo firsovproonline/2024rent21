@@ -71,13 +71,14 @@ function latin_to_cyrill(text) {
     })
     const okrugList ={}
     rowsGet.UNDERGROUND.forEach(item => {
+        //console.log(item)
         if(!okrugList[item.OKRUG])okrugList[item.OKRUG]=[]
         okrugList[item.OKRUG].push(item.NAME)
     });
 //    const m = await $fetch( `/api/metro`, {
 //      method: 'GET',
 //    })
-//     console.log(m)
+    //console.log(okrugList)
 </script>
 <template>
         <div style="margin-bottom: 12px; padding: 0px !important;display: flex;flex-wrap: wrap;justify-content: space-around;"  >
@@ -85,7 +86,7 @@ function latin_to_cyrill(text) {
                 <div v-if="row!==''">
                     <h1>{{row}}</h1>
                     <div style="display: flex;flex-wrap: wrap;justify-content: space-between;padding: 6px;">
-                        <div v-for="item in okrugList[row]" :key="item" style="margin-left: 1px;"><a :href="'/'+ url +'/metro-'+cyrill_to_latin(item).toLowerCase()">{{ item }}</a></div>
+                        <div v-for="item in okrugList[row]" :key="item" style="margin-left: 1px;display: flex;"><a :href="'/'+ url +'/metro-'+cyrill_to_latin(item).toLowerCase()">Ⓜ{{ item }}</a></div>
                     </div>
 
                 </div>
@@ -95,7 +96,7 @@ function latin_to_cyrill(text) {
 
 
 <!--
-    <div class="listmetro mdiv" style="width:690px;'">
+    <div class="listmetro mdiv" style="width:690px;'">:style="'margin-right: 6px;'+'color:'+metroItem.color"ф
         <div class="header"></div>
 
             <ul>
