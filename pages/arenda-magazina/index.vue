@@ -57,6 +57,7 @@
                         
                         <div><a href="/arenda-kafe-restoran">Аренда помещений под Кафе, Ресторан</a></div>
                         <div><a href="/arenda-magazina">Аренда помещений под магазин</a></div>
+                        <div><a href="/arenda-magazina/metro">Аренда помещений по метро</a></div>                        
                         <div><a href="/prodazha-kafe-restoran">Продажа помещений под Ресторан</a></div>
                         <div><a href="/arenda-psn">Аренда ПСН</a></div>
                         <div><a href="/prodazha-psn">Продажа ПСН</a></div>

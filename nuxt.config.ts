@@ -5,6 +5,9 @@
 //pm2 save
 //pm2 startup
 export default defineNuxtConfig({
+  routeRules: {
+    "/sitemap": { prerender: true },
+  },
   colorMode: {
     preference: 'light'
   },
@@ -95,8 +98,12 @@ export default defineNuxtConfig({
       asyncContext: false,
       websocket: true,
       tasks: true,
-
+      inlineRouteRules: true
     },
+    prerender: {
+      crawlLinks: true,
+      routes: ["/sitemap"],
+    },    
   },
   pages: true,
   components: {

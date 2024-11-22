@@ -1,4 +1,5 @@
 <script setup>
+prerenderRoutes(["/sitemap"]);
     definePageMeta({
         layout: 'universal',
         pageType: 1,
