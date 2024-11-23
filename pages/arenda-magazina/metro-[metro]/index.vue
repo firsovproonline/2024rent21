@@ -76,7 +76,6 @@ import logo from '/components/contents/logo'
     if(route.params.page) page.value = route.params.page*1
     const rowsGet = ref({})
     const nextUrl = '/arenda-magazina/metro-'+route.params.metro
-console.log(metroRU)
     const findQuery = {
         page: page.value,
         perPage: 10,

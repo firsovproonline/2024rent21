@@ -10,7 +10,7 @@ export default {
         if(page > 0)page--
         q.perPage = q.perPage*1
         page = page * q.perPage
-        console.log(WHERE)
+        //console.log(WHERE)
         const queryTotal = 'SELECT count(id) as total FROM metroRent21 '+WHERE;
         const [total] = await connectionMysql.execute(queryTotal);
         const query = 'SELECT * FROM metroRent21 '+WHERE+` order by ID desc limit `+page+','+q.perPage;

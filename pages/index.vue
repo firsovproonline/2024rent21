@@ -77,7 +77,7 @@ prerenderRoutes(["/sitemap"]);
       bodyAttrs: {
         class: 'test'
       },
-      script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
+      script: [ ]
     })
 </script>
 <template>

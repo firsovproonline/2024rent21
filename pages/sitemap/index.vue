@@ -13,6 +13,7 @@ import url from '/components/ui/url'
         //console.log(item)
     })
     const { $rent21 } = useNuxtApp()
+    
     $rent21().underground.fromName().forEach(item=>{
         outt +='<url><loc>https://rent21.ru/arenda-ofisa/metro-'+item.latin.toLowerCase()+'</loc></url>'
         outt +='<url><loc>https://rent21.ru/arenda-sklada/metro-'+item.latin.toLowerCase()+'</loc></url>'
@@ -23,9 +24,9 @@ import url from '/components/ui/url'
     outt +=`</urlset>`
     
 </script>
-<template>
+<template >
 
-        {{outt }}
+<template v-html="outt"></template >
 
     
 </template>

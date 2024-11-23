@@ -20,6 +20,20 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
       script: [
+        { innerHTML:`   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(1071644, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+` },
         { src: 'https://api-maps.yandex.ru/v3/?apikey=80f1ab75-f93f-476a-ab4c-4f8de2496f76&lang=ru_RU' },
         { src: '/js/dhtmlx/codebase/dhtmlx.js' }
       ],
@@ -72,6 +86,8 @@ export default defineNuxtConfig({
       cssCodeSplit: true,
     },
     server: {
+      NITRO_PORT: 3010,
+      port: 3010,
       // Nuxt launches Vite in middleware mode (port 3000), as well as the HMR server (port 24678).
       // The browser will reject requests from localhost:3000 to the HMR server, due to CORS.
       // Because of this, Vite by default adds "Access-Control-Allow-Origin": "*" header.
@@ -94,15 +110,17 @@ export default defineNuxtConfig({
 
   },  
   nitro: {
+    NITRO_PORT: 3010,
+    port:3010,
     experimental: {
       asyncContext: false,
       websocket: true,
       tasks: true,
-      inlineRouteRules: true
+      //inlineRouteRules: true
     },
     prerender: {
-      crawlLinks: true,
-      routes: ["/sitemap"],
+      //crawlLinks: true,
+      //routes: ["/sitemap"],
     },    
   },
   pages: true,

@@ -1,15 +1,11 @@
 module.exports = {
-    apps : [
-      {
-        name: "nuxt-dev",
-        script: "npm",
-        args: "run dev"
-      },
-      {
-        name: "rent21pm2-prod",
-        script: "npm",
-        args: "run preview"
-      }
-    ]
-  }
+  apps: [
+    {
+      name: 'NuxtAppName',
+      port: '3010',
+      interpreter: "node",
+      script: './.output/server/index.mjs'
+    }
+  ]
+}
   

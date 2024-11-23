@@ -80,7 +80,6 @@
                 const j = JSON.parse(row.POINTS)
                 //console.log(row.NAME, j)
                 j.forEach(mark=>{
-                    console.log(row.NAME,mark)
                     const markerElement = document.createElement('div');
                     markerElement.className = 'marker-class';
                     markerElement.style.color = '#'+mark.color

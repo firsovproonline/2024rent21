@@ -29,6 +29,18 @@
 						</td>
 						<td valign="top" style="text-align: right;padding-right: 14px;">
 						<a href="/">Аренда офиса от собственника без комиссии</a>	
+						</td>
+						<td>
+						<!-- Yandex.Metrika informer -->
+						<a href="https://metrika.yandex.ru/stat/?id=1071644&amp;from=informer"
+target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/1071644/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="1071644" data-lang="ru" /></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<noscript><div><img src="https://mc.yandex.ru/watch/1071644" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 						</td>					
 					</tr>
 				</tbody></table>

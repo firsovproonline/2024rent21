@@ -10,7 +10,6 @@ const item = await $fetch( `/api/im_object`, {
   }
 })
 const row = item.rows[0]
-console.log(item)
 const rem = computed(()=>{
   return row.REM.split('\n')
 })

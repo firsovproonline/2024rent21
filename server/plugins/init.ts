@@ -62,23 +62,22 @@ export default defineNitroPlugin( (nitroApp) => {
       });
       nitroApp.hooks.hook('render:response', (response, { event }) => { 
         if(event['_path']=='/sitemap'){
-            let g = response.body.slice(response.body.indexOf('<!--[-->')+8 )
-            //Content-Type: text/xml
-            response.body=g.slice(0,g.indexOf('<!--]-->') )
+            let g = response.body.slice(response.body.indexOf('<template>')+10 )
+            response.body=g.slice(0,g.indexOf('</template>') )
             response.headers = "{ 'content-type': 'text/xml', 'Accept-Charset': 'utf-8, iso-8859-1;q=0.5, *;q=0.1' }"
-            //console.log(response)
         }
 
 
       })
       nitroApp.hooks.hook('render:html', (html, { event }) => {
-        if(event['_path']=='/sitemap'){
+        if(event['_path']!=='/sitemap'){
 //            console.log('render:html', event['_path'])
 //            html.head.length =0
 //            html.body.length =0
 ///            html.clear
+//html.bodyAppend.push(``)
+
         }
-        //html.bodyAppend.push('<hr>Appended by custom plugin')
       })      
     if(updateMetro){
         //msqlf.query(`select * from metroRent21 WHERE `)
