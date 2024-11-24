@@ -110,11 +110,9 @@ const { $viewport } = useNuxtApp()
         </div>
         <div style="width: 18px;"></div>
         <div style="display: flex;flex-wrap: wrap;align-items: stretch;align-content: space-between;">
-            <div v-if="router.currentRoute.value.meta.meta">
-                <h1 class="sh1">{{ router.currentRoute.value.meta.meta.title }}</h1>							
-                <div class="module" ><p>Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы</p></div>
-            </div>
-            <div v-if="router.currentRoute.value.meta.meta" class="module" ><p>{{ router.currentRoute.value.meta.meta.description }}</p></div>
+            <h1 v-if="router.currentRoute.value.meta.meta && router.currentRoute.value.meta.meta.title" class="sh1">{{ router.currentRoute.value.meta.meta.title }}</h1>							
+            <h1 v-else class="sh1" ><p>Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы</p></h1>
+            <div v-if="router.currentRoute.value.meta.meta && router.currentRoute.value.meta.meta.description" class="module" ><p>{{ router.currentRoute.value.meta.meta.description }}</p></div>
 
             <div style="flex: 1 auto;">
                 <div style="display: flex;justify-content: flex-start;margin-top: 8px;" class="menurentH">

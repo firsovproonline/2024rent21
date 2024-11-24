@@ -52,21 +52,21 @@ const { $viewport } = useNuxtApp()
         return string.charAt(0).toUpperCase() + string.slice(1);
     }    
     const route = useRoute()
-    definePageMeta({
-        layout: 'universal',
-    });
     const metroRU = capitalizeFirstLetter(latin_to_cyrill(route.params.metro))
-
+    useHead({
+        title: 'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
+        meta: [
+            { name: 'keywords', content: 'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.' },
+            { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
+        ]
+    })
     definePageMeta({
         layout: 'universal',
-        meta: {
-            keywords:'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.',
-            description: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.`,
-            title:'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
-            titleMobile:'Аренда офисов От Собственников'
-        }          
+        meta: {}          
     });
-
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'Аренда офисов в Москве метро '+metroRU+' Снять офис в Москве метро '+metroRU+'.'
+    useRouter().currentRoute.value.meta.meta.title = 'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.'
+    useRouter().currentRoute.value.meta.meta.description = `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.`
 
     const page = ref(1)
     if(route.params.page) page.value = route.params.page*1

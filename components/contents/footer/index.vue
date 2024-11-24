@@ -31,6 +31,7 @@
 						<a href="/">Аренда офиса от собственника без комиссии</a>	
 						</td>
 						<td>
+							
 						<!-- Yandex.Metrika informer -->
 						<a href="https://metrika.yandex.ru/stat/?id=1071644&amp;from=informer"
 target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/1071644/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"

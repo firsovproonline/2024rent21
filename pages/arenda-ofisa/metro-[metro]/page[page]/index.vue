@@ -51,17 +51,19 @@ const { $viewport } = useNuxtApp()
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }    
-    const route = useRoute()
+    const route = await useRoute()
+    const metroRU = await capitalizeFirstLetter(latin_to_cyrill(route.params.metro))
     definePageMeta({
         layout: 'universal',
         meta: {
             keywords:'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.',
             description: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.`,
             title:'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
-            titleMobile:'Аренда офисов От Собственников'
+            //titleMobile:'Аренда офисов в Москве метро '+metroRU+' Снять офис в Москве метро '+metroRU+'.',
         }          
     });
-    const metroRU = capitalizeFirstLetter(latin_to_cyrill(route.params.metro))
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'Аренда офисов в Москве метро '+metroRU+' Снять офис в Москве метро '+metroRU+'.'
+/*
     const t = {
         title: 'Аренда офисов в Москве метро '+metroRU+' Снять офис в Москве метро '+metroRU+'.',
         meta: [
@@ -70,7 +72,7 @@ const { $viewport } = useNuxtApp()
         ]
     }
     useHead(t)
-
+*/
 
     const page = ref(1)
     if(route.params.page) page.value = route.params.page*1
