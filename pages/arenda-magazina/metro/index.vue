@@ -6,25 +6,22 @@ const { $viewport } = useNuxtApp()
 
 
 useHead({
-    title: 'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
-    meta: [
-        { name: 'keywords', content: 'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.' },
-        { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
-    ]
-})
-
-
+        title: 'Аренда помещений под магазин, Снять помещение под магазин.',
+        meta: [
+            { name: 'keywords', content: 'аренда помещений под магазин, аренда помещений под магазин в москве, от собственника, без комиссии, снять помещений под магазин, аренда помещения под магазин.' },
+            { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
+        ]
+    })
     definePageMeta({
         layout: 'universal',
-        meta: {
-            keywords:'аренда офиса, аренда офисов, в москве, от собственника, без комиссии, снять офис, снять помещение, аренда помещения.',
-            description: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.`,
-            title:'Аренда офиса в Москве От Собственника и Без Комиссии, Аренда офисов и помещений по всей Москве !.',
-            titleMobile:'Аренда офисов по метро'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'Аренда помещений под магазин по метро  помещений под магазин в Москве по метро .'
+    useRouter().currentRoute.value.meta.meta.title = 'аренда помещений под магазин, аренда помещений под магазин в москве от собственника, без комиссии, снять помещений под магазин, снять помещение, аренда помещения.'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
+
     const { $rent21 } = useNuxtApp()
-    $rent21().titles.top='Аренда торговых помещений по метро'
+
 </script>
 <template>
 
@@ -84,7 +81,7 @@ useHead({
         </div>  
         <UCard :ui="{ body: { base: 'flex-fitcontent' } }" style="padding-left: 6px; padding-right: 6px;height: fit-content;">
                 <div v-for="item in $rent21().underground.fromName()" :key="item" :style="'margin-bottom:4px; margin-left: 1px;display: flex;color:#'+item.color">
-                    <a :href="'/arenda-ofisa/metro-'+item.latin.toLowerCase()">Ⓜ{{ item.name }}</a>
+                    <a :href="'/arenda-magazina/metro-'+item.latin.toLowerCase()">Ⓜ{{ item.name }}</a>
                 </div>
             </UCard>
 

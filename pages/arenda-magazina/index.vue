@@ -15,12 +15,15 @@
             { name: 'description', content: `Rent21 - Доска обьявлений  Предложения по аренде магазинов без комиссии от собственников в Торговых Центрах Москвы  Мы помогаем снять магазин в Тороговых Центрах Москвы.` }
         ]
     })
+
     definePageMeta({
         layout: 'universal',
-        meta: {
-            titleMobile:'Аренда помещений под магазин'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'Аренда помещений под магазин'
+    useRouter().currentRoute.value.meta.meta.title = 'Rent21 - Доска обьявлений  Предложения по аренде магазинов без комиссии от собственников в Торговых Центрах Москвы  Мы помогаем снять магазин в Тороговых Центрах Москвы.'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
+
     const findQuery = {
         page: page.value,
         perPage: 10,

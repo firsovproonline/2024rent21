@@ -15,12 +15,16 @@
             { name: 'description', content: `Аренда офисов и помещений От Собственников по всей Москве БЕЗ КОМИССИИ! Помогаем снять офис и помещения БЕЗ КОМИССИЙ!.` }
         ]
     })
+
     definePageMeta({
         layout: 'universal',
-        meta: {
-            titleMobile:'аренда банковских помещений в Москве'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'аренда банковских помещений в Москве'
+    useRouter().currentRoute.value.meta.meta.title = 'аренда банковских помещений в Москве, Снять помещение под банк в Москве .'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
+
+
     const findQuery = {
         page: page.value,
         perPage: 10,

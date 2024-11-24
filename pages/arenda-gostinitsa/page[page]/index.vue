@@ -12,10 +12,12 @@
     })
     definePageMeta({
         layout: 'universal',
-        meta: {
-            titleMobile:'аренда помещений под гостиницу'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'аренда помещений под гостиницу'
+    useRouter().currentRoute.value.meta.meta.title = 'аренда помещений под гостиницу, хостел, общежитие в Москве.'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
+
     const page = ref(1)
     if(route.params.page) page.value = route.params.page*1
     const nextUrl = '/arenda-gostinitsa'

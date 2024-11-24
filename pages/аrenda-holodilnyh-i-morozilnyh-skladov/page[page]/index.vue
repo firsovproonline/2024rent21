@@ -15,10 +15,11 @@
     })
     definePageMeta({
         layout: 'universal',
-        meta: {
-            titleMobile:'помещений с Холод кам и Мороз камерами'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'помещений с Холод кам и Мороз камерами'
+    useRouter().currentRoute.value.meta.meta.title = 'Аренда склада и помещений с Холод  кам  и Мороз  камерами  ( Снять склад и помещение  с Холод  кам  и Мороз  камерами ) Все варианты предложений по аренде склада и помещений в Москве от Собственников.'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
     const findQuery = {
         page: page.value,
         perPage: 10,
