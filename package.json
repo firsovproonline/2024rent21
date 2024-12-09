@@ -26,7 +26,7 @@
     "gm": "^1.25.0",
     "mysql2": "^3.9.1",
     "nitropack": "npm:nitropack-nightly@latest",
-    "nodemailer": "^6.9.14",
+    "nodemailer": "^6.9.16",
     "nuxi": "npm:nuxi-nightly@latest",
     "nuxt": "npm:nuxt-nightly@latest",
     "nuxt-mail": "^5.0.1",
@@ -44,6 +44,7 @@
   "packageManager": "bun@1.0.29",
   "devDependencies": {
     "@types/blob-to-buffer": "^1.2.2",
+    "@types/node": "^22.10.1",
     "cross-env": "^7.0.3",
     "sass": "^1.77.3"
   }

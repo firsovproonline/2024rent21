@@ -30,6 +30,7 @@
       params: {
         page: 1,
         perPage: 7,
+        orderBy:' ROUND(UID)'
         //orderBy:'ID ASC'
       }
     })
@@ -39,7 +40,7 @@
       params: {
         page: 1,
         perPage: 15,
-        orderBy:'ID DESC',
+        orderBy:' ID DESC',
         TIP:'Офис',
         OPP:'Аренда'
       }

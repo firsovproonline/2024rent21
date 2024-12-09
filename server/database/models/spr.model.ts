@@ -11,6 +11,10 @@ export default {
         });
         return {l:metroList.lines,m:metroNameList}
     },
+    async nalog(q: any){
+
+    },
+
     async list(q: any){
         let WHERE = ``
         if(q.OPP && q.OPP !== '' && q.OPP !== 'undefined'){
@@ -98,6 +102,7 @@ export default {
         const [UNDERGROUND] = await connectionMysql.execute(findSql);
         const [OKRUG] = await connectionMysql.execute(`select OKRUG as NAME  from im_objectКtRent21  GROUP BY OKRUG  ORDER BY OKRUG`);
         const [RAJON] = await connectionMysql.execute(`select RAJON as NAME  from im_objectКtRent21  GROUP BY RAJON  ORDER BY RAJON`);
-        return {UNDERGROUND:UNDERGROUND,OKRUG:OKRUG,RAJON:RAJON}
+        const [NALOGNAME] = await connectionMysql.execute(`select NALOGNAME as NAME, NALOGKOD  from im_objectКtRent21  GROUP BY NALOGNAME  ORDER BY NALOGNAME`);
+        return {UNDERGROUND:UNDERGROUND,OKRUG:OKRUG,RAJON:RAJON,NALOGNAME:NALOGNAME}
     }
 }

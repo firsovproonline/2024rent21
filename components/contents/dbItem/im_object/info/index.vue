@@ -7,6 +7,11 @@ import infomap from '/components/contents/info/map/yandex'
             required: true,
             default:{PHOTO:JSON.stringify([])}
         },      
+        important: {
+            type: Object,
+            required: true,
+            default:{}
+        },
     });
 
     const row = computed(()=>{
@@ -53,12 +58,6 @@ import infomap from '/components/contents/info/map/yandex'
 
         <div class="col" style="text-align: -webkit-center;">
           <UCard :ui="{ body: { base: 'grid grid-cols-1 ffSr' } }" style="width: 100%;height: 280px;background-color: #f6f6f6">
-<!--
-<UCarousel style="min-width: 50%;max-width: 100%;" ref="carouselRef"  :items="items" :ui="{ item: 'basis-full', indicators: {
-        wrapper: 'relative bottom-0 mt-4'} }" class="rounded-lg overflow-hidden" arrows >
-        </UCarousel>
-
--->
         <UCarousel style="min-width: 100%;max-width: 100%;" ref="carouselRef"
     :items="items"
     :ui="{
@@ -74,9 +73,6 @@ import infomap from '/components/contents/info/map/yandex'
   
                   <template #default="{ item }">
                     <div :src="item" draggable="false" :style="'background-image: url(\''+item+'\');height:210px;width:100%;background-position: center;background-size: contain;background-repeat: no-repeat;'" ></div>
-<!--
-                    <img :src="item" class="w-full" draggable="false">
--->
 </template>
     <template #indicator="{ onClick, page, active }">
       <UButton color="gray" :variant="active ? 'solid' : 'outline'" size="2xs" class="rounded-full min-w-6 justify-center" style="margin-right: 4px;" @click="onClick(page)" />
@@ -140,21 +136,11 @@ import infomap from '/components/contents/info/map/yandex'
       
       </UCard>
         <div class="mobileOnly" >
-          <rformBig/>
+          <rformBig :row ='important'/>
         </div>
-<!--
-      <UCard v-if="item.listUlita.length > 0" :ui="{ body: { base: 'grid grid-cols-1 px-1' } }" style="margin-bottom: 12px; padding: 0px !important;margin-top: 12px;">
-        <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
-            <div  v-for="row in item.listUlita" :key="row.LATIN">
-              <a :href="'/arenda-ofica/ulitca-'+row.LATIN">{{ row.RU}}</a> 
-            </div>
-        </div>
-      </UCard>
-
--->
     </div>
     <div style="min-width: 300px;margin-left: 12px;" class="nomobile">
-      <rformBig />
+      <rformBig :row ='important' />
     </div>
   </div>
 </template>

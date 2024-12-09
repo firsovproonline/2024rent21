@@ -12,10 +12,11 @@
     })
     definePageMeta({
         layout: 'universal',
-        meta: {
-            titleMobile:'аренда медицинского центра'
-        }          
+        meta: {}          
     });
+    useRouter().currentRoute.value.meta.meta.titleMobile = 'аренда медицинского центра'
+    useRouter().currentRoute.value.meta.meta.title = 'аренда медцентр, аренда медицинского центра, аренда помещения под медицинский центра, снять медцентр, снять медицинское помещение.'
+    useRouter().currentRoute.value.meta.meta.description = `Rent21 - Доска обьявлений. Предложения по аренде офисов без комиссии от собственников в Бизнес Центрах Москвы. Мы помогаем снять офис в Бизнес Центрах Москвы`
     const page = ref(1)
     if(route.params.page) page.value = route.params.page*1
     const nextUrl = '/arenda-medicinskij-centr'

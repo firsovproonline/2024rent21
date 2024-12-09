@@ -1,4 +1,5 @@
-import photoMysql from '../config/mysqlPhoto';
+import photoMysql from '../config/mysql';
+//import photoMysql from '../config/mysqlPhoto';
 // @ts-ignore
 import gm from 'gm'
 function rotate (readStream,w,h) {
@@ -17,8 +18,8 @@ function rotate (readStream,w,h) {
 export default {
 // @ts-ignore
     async imageGet(params: any) {
-        let query = `SELECT PHOTO as IMG from foto WHERE UID='`+params.uid+`' AND STEP=0 LIMIT 0,1`
-        if(params.puid) query = `SELECT PHOTO as IMG from foto WHERE UID='`+params.puid+`' AND TITLE='`+params.title+`' LIMIT 0,1`
+        let query = `SELECT PHOTO as IMG from Photo_Rent21 WHERE UID='`+params.uid+`' AND STEP=0 LIMIT 0,1`
+        if(params.puid) query = `SELECT PHOTO as IMG from Photo_Rent21 WHERE UID='`+params.puid+`' AND TITLE='`+params.title+`' LIMIT 0,1`
 //        if(params.puid) query = `SELECT PHOTO as IMG from foto WHERE TITLE='`+params.title+`' LIMIT 0,1`
         //console.log(query)
         const [img] = await photoMysql.execute(query);

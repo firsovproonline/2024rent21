@@ -12,6 +12,46 @@ import { onMounted } from 'vue';
             //{ src: 'https://api-maps.yandex.ru/v3/?apikey=80f1ab75-f93f-476a-ab4c-4f8de2496f76&lang=ru_RU' }
         ],        
     }) 
+    const initDoubleTouchMove = (mapInstance) => {
+    let isTwoFingers = false;
+
+    const behaviors = {
+        static: [...mapInstance.behaviors, 'drag'],
+        move: mapInstance.behaviors.filter(behavior => behavior !== 'drag')
+    }
+
+    mapInstance.container.addEventListener('touchstart', function(e) {
+        console.log('dd');
+        if (e.touches.length === 2) {
+            isTwoFingers = true;
+        } else {
+            isTwoFingers = false;
+        }
+    });
+
+    mapInstance.container.addEventListener('touchmove', function(e) {
+        if (isTwoFingers) {
+            setBehaviorActivity(mapInstance, behaviors);
+        } else {
+            setBehaviorActivity(mapInstance, behaviors, false);
+        }
+    });
+
+    mapInstance.container.addEventListener('touchend', function(e) {
+        setBehaviorActivity(mapInstance, behaviors);
+    });
+
+    setBehaviorActivity(mapInstance, behaviors);
+}
+
+const setBehaviorActivity = (mapInstance, behaivorArrays, isStatic = true) => {
+    if (isStatic) {
+        mapInstance.setBehaviors(behaivorArrays.static); 
+    } else {
+        mapInstance.setBehaviors(behaivorArrays.move); 
+    }
+}
+
 
     onMounted((w) => {
         setTimeout(()=>{
@@ -23,12 +63,23 @@ import { onMounted } from 'vue';
                     location: {
                         // Координаты центра карты
                         center: [props.row.LAT,props.row.LNG],
-
+                        behaviors: [
+            // "mouseRotate",
+            // "mouseTilt",
+            // "magnifier",
+            // "pinchRotate",
+            // "panTilt",
+            "drag"
+        ],
                         // Уровень масштабирования
                         zoom: 18
                     }
                 }
             );
+//            mapY.behaviors =["scrollZoom","pinchZoom","dblClick"]
+initDoubleTouchMove(mapY);
+            console.log(mapY)
+//            mapY.behaviors.disable('drag');
             mapY.addChild(new YMapDefaultSchemeLayer());
             mapY.addChild(new YMapDefaultFeaturesLayer());
             const markerElement = document.createElement('div');

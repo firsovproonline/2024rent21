@@ -36,6 +36,7 @@
                     }
                 }
             );
+
             mapY.addChild(new YMapDefaultSchemeLayer());
             mapY.addChild(new YMapDefaultFeaturesLayer());
 

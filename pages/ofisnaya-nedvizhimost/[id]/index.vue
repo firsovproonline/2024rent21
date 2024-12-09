@@ -7,20 +7,16 @@ const item = await $fetch( `/api/im_object`, {
     page: 1,
     perPage: 15,
     id:route.params.id,
+    dopinfo:1
   }
 })
 const row = item.rows[0]
+//console.log(item)
 const rem = computed(()=>{
   return row.REM.split('\n')
 })
 
-useHead({
-    title: row.TITLE,
-    meta: [
-        { name: 'keywords', content: row.TITLE},
-        { name: 'description', content: row.TITLE }
-    ]
-})
+
 
 definePageMeta(
   {
@@ -35,7 +31,10 @@ definePageMeta(
 
 </script>
 <template>
-  <infoOb :row="row"/>
+
+<infoOb v-if="row" :row="row" :important="item.important"/>
+
+
 </template>
 <style>
 .w1{

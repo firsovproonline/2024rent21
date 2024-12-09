@@ -54,9 +54,18 @@ function latin_to_cyrill(text) {
 const initSpr = false
 const initFlag = true
 const updateMetro = true
+async function getPhoto (sql) {
+    return new Promise(function (resolve, reject) {
+        //console.log(readStream)
+        msqlNode.execute(sql).then(e=>{
+            // @ts-ignore
+            resolve(e)
 
+        })
+    })
+}
 // @ts-ignore
-export default defineNitroPlugin( (nitroApp) => {
+export default defineNitroPlugin( async (nitroApp) => {
     nitroApp.hooks.hook('request', (event) => {
         event.context.rent21Factory = nitroApp
       });
@@ -201,7 +210,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                         if(linc[build['UID']]){
                             // @ts-ignore
                             const address = outOb['adRes21'][linc[build.UID].PUID]
-                            //console.log(build)
+                            //console.log(outOb['ob21'][UID])
                             if(!outOb['ob21'][UID].PLIN)outOb['ob21'][UID].PLIN = ''
                             if(!outOb['ob21'][UID].PLALL)outOb['ob21'][UID].PLALL = ''
                             //if(outExport[UID].METRO)address.METRO = outExport[UID].METRO
@@ -215,11 +224,13 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                             }
                             //let glmetro = ''
                             //if(outOb['ob21'][UID].TIP == 'Торговая площадь')
-                            //console.log(outOb['ob21'][UID].TIPP)
+                            //console.log(outOb['ob21'][UID].IMPORTANT)
+                            //console.log(address)
                             // @ts-ignore
                             values.push([
                                 UID,
                                 address.GOROD,
+                                outOb['ob21'][UID].IMPORTANT,
                                 JSON. stringify(address.METRO),
                             // @ts-ignore
                                 UNDERGROUND,
@@ -228,6 +239,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                                 address.LAT,
                                 address.LNG,
                                 address.NALOGNAME,
+                                address.NALOGKOD,
                                 address.ULITCA,
                                 address.DOM,
                                 address.OKRUG,
@@ -264,14 +276,26 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                 // @ts-ignore
                 outOb ={}
                 msqlf.query(`DROP TABLE im_objectКtRent21;`).then(r=>{
+                    const createSqlPhoto = `CREATE TABLE IF NOT EXISTS Photo_Rent21 (
+                        ID int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+                        UID varchar(64) DEFAULT NULL,
+                        PHOTO longblob DEFAULT NULL,
+                        TITLE varchar(128) DEFAULT NULL,
+                        STEP int(2) NOT NULL DEFAULT 0,
+                        LABEL varchar(128) DEFAULT NULL,
+                        UNIQUE INDEX ID (ID)
+                      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0
+                      `
                     const createSql = `CREATE TABLE IF NOT EXISTS im_objectКtRent21 (
                         ID int(11) unsigned NOT NULL AUTO_INCREMENT,
                         UID varchar(64) NOT NULL DEFAULT '',
                         GOROD varchar(64),
+                        IMPORTANT varchar(64),
                         METRO text,
                         PHOTO text,
                         RAJON varchar(64),
                         NALOGNAME varchar(64),
+                        NALOGKOD float,
                         LAT float,
                         LNG float,
                         ULITCA varchar(128),
@@ -307,12 +331,53 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
         
                       ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;                
                         `
-                    msqlf.query(createSql).then(e=>{
-                        msqlf.query(`INSERT INTO im_objectКtRent21 (UID,GOROD,METRO,UNDERGROUND,UNDERGROUND_LATIN,RAJON,
-                            LAT,LNG,NALOGNAME,ULITCA,DOM,OKRUG,OKRUG_LATIN,TIP,OPP,REM,PL1,TIPD,
+                        const arrayPhotos = {}
+                        msqlf.query(createSql).then(e=>{
+                        msqlf.query(`INSERT INTO im_objectКtRent21 (UID,GOROD,IMPORTANT,METRO,UNDERGROUND,UNDERGROUND_LATIN,RAJON,
+                            LAT,LNG,NALOGNAME,NALOGKOD,ULITCA,DOM,OKRUG,OKRUG_LATIN,TIP,OPP,REM,PL1,TIPD,
                             TITLE,PHOTO,TIPP,KLASS,CENA_AR,CENA_AR_MES,CENA_AR_MES_ALL,CENA_AR_M2_DAY,CENA_PR_M2,CENA_PR,TIPZD,ETAG,
-                            ConditionType,PARKNAZ,Infrastructure,AccessType) VALUES ?`,[values]).then(item=>{
-                            console.log('Nitro plugin' )
+                            ConditionType,PARKNAZ,Infrastructure,AccessType) VALUES ?`,[values]).then(async item=>{
+                                /*
+                                await msqlNode.query(`set global max_prepared_stmt_count = 100000;`)
+                                await msqlf.query(`set global max_prepared_stmt_count = 100000;`)
+                                await msqlf.query(`DROP TABLE IF EXISTS Photo_Rent21;`)
+                                await msqlf.query(createSqlPhoto)
+                                await msqlf.query(`ALTER TABLE Photo_Rent21 ADD INDEX UID (UID (64))`)
+                                await msqlf.query(`ALTER TABLE Photo_Rent21 ADD INDEX TITLE (TITLE (64))`)
+
+                                console.log('Обработка фото' )
+                                let g = 0
+                                for(let key in outExport){
+                                    outExport[key].PHOTO.forEach(async iPhoto=>{
+                                        if(!arrayPhotos[iPhoto.PUID+iPhoto.NAME])
+                                        arrayPhotos[iPhoto.PUID+iPhoto.NAME] = iPhoto
+                                        const e = await msqlNode.execute(`SELECT PHOTO as IMG,TITLE,STEP,UID from foto WHERE UID='`+iPhoto.PUID+`' AND TITLE='`+iPhoto.NAME+`' LIMIT 0,1`)
+                                        if(e && e[0] && e[0][0]){
+                                            const ar1=[];
+                                            // @ts-ignore
+                                            ar1.push([
+                                                e[0][0].IMG,
+                                                e[0][0].TITLE,
+                                                e[0][0].STEP,
+                                                e[0][0].UID
+                                                ])
+                                            await msqlf.query(`INSERT INTO Photo_Rent21 (PHOTO,TITLE,STEP,UID) VALUES ?`,[ar1])
+                                            //qq.close()
+                                            
+                                            console.log(g)
+
+                                        }
+                                        // @ts-ignore
+                                        //process.stdout.write('#')
+                                        g++
+                                    })
+                                }  
+                                //console.log(arrayPhotos )
+                                await msqlNode.query(`set global max_prepared_stmt_count = 16000;`)
+                                await msqlf.query(`set global max_prepared_stmt_count = 16000;`)
+                                */
+                                console.log('Nitro plugin' )
+
                         })
                     })    
                 })

@@ -126,6 +126,7 @@ interface IIm_object {
     ID?: number;
     GOROD?: string;
     METRO?: string;
+    IMPORTANT: string;
     RAJON?: string;
     ULITCA?: string;
     PL1?: string;
